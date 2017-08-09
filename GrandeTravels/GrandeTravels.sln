@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{1878E2E1-4D4C-4CCF-A4A9-65110CDCD009}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{90B8731B-5377-4875-8CAB-51274ECD2567}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "GrandeTravels", "src\GrandeTravels\GrandeTravels.xproj", "{D47D2B2A-E067-4B8A-9AD2-0F83F75FC3C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D47D2B2A-E067-4B8A-9AD2-0F83F75FC3C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D47D2B2A-E067-4B8A-9AD2-0F83F75FC3C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D47D2B2A-E067-4B8A-9AD2-0F83F75FC3C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D47D2B2A-E067-4B8A-9AD2-0F83F75FC3C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D47D2B2A-E067-4B8A-9AD2-0F83F75FC3C0} = {1878E2E1-4D4C-4CCF-A4A9-65110CDCD009}
+	EndGlobalSection
+EndGlobal
