@@ -37,7 +37,13 @@
 
                     @if (User.Identity.IsAuthenticated)
                     {
-                        <li><a asp-area="" asp-controller="Account" asp-action="Logout">Logout</a></li>
+                        <li>
+                            <a>
+                                <form method="post" asp-controller="Account" asp-action="Logout" asp-anti-forgery="true">
+                                    <input id="logoutBtn" type="submit" value="Logout" />
+                                </form>
+                            </a>
+                        </li>
                     }
                     else
                     {

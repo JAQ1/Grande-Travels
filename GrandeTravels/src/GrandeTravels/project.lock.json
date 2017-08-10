@@ -5158,8 +5158,6 @@
         "lib/net451/Microsoft.EntityFrameworkCore.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.xml"
-<<<<<<< HEAD
-=======
       ]
     },
     "Microsoft.EntityFrameworkCore.Design/1.0.0-preview2-final": {
@@ -5189,7 +5187,6 @@
         "lib/net451/Microsoft.EntityFrameworkCore.Design.Core.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.Core.dll",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Design.Core.xml"
->>>>>>> SignUp
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/1.1.2": {
@@ -5203,8 +5200,6 @@
         "lib/net451/Microsoft.EntityFrameworkCore.Relational.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.xml"
-<<<<<<< HEAD
-=======
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational.Design/1.0.0": {
@@ -5218,7 +5213,6 @@
         "lib/net451/Microsoft.EntityFrameworkCore.Relational.Design.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.dll",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.Design.xml"
->>>>>>> SignUp
       ]
     },
     "Microsoft.EntityFrameworkCore.SqlServer/1.1.2": {
