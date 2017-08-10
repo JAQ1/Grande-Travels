@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+using GrandeTravels.Models;
 
 namespace GrandeTravels.Services
 {
-    public class MyDbContext : DbContext
+    public class MyDbContext : IdentityDbContext<User>
     {
         public DbSet<Package> TblPackage { get; set; }
+        public DbSet<CustomerProfile> TblCustProfile { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
