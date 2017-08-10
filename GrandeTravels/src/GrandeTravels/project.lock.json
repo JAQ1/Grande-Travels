@@ -4955,29 +4955,29 @@
       ]
     },
     "Microsoft.EntityFrameworkCore/1.1.2": {
-      "sha512": "SPBs8SQlpXHUTv7NwQQSCtyXuMFXgqiuHYA1Xdhx82OVunNqm29PlUqRHgvajHq+LVApxDaTDhAJwEABGIkeqw==",
+      "sha512": "2oY1cQ3DEhpbRjlDBE1zb7IngKyPC4fslAX5WL1mnVQOLX/8BPOAjgYM2inzNK2z8ld/DxBUZEwc3xfNc8qhbw==",
       "type": "package",
       "path": "Microsoft.EntityFrameworkCore/1.1.2",
       "files": [
+        "Microsoft.EntityFrameworkCore.1.1.2.nupkg.sha512",
+        "Microsoft.EntityFrameworkCore.nuspec",
         "lib/net451/Microsoft.EntityFrameworkCore.dll",
         "lib/net451/Microsoft.EntityFrameworkCore.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.dll",
-        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.xml",
-        "microsoft.entityframeworkcore.1.1.2.nupkg.sha512",
-        "microsoft.entityframeworkcore.nuspec"
+        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.xml"
       ]
     },
     "Microsoft.EntityFrameworkCore.Relational/1.1.2": {
-      "sha512": "4dQP93TsIH7KbMxvsEqeq/37kZZ/JpxHpRfd/2lSmw4eP7+JbwdDls2t7NwuC3qxmqAonexuVjfZf1C4cyHhJg==",
+      "sha512": "oiPXaIMk8cPbEmtcChzhPzM1ZyEYMoy8sMYWgWfv292Q0e0U2v7CIrtGylrORVZOA4lb9M0gWjbfKPtj7iDbxA==",
       "type": "package",
       "path": "Microsoft.EntityFrameworkCore.Relational/1.1.2",
       "files": [
+        "Microsoft.EntityFrameworkCore.Relational.1.1.2.nupkg.sha512",
+        "Microsoft.EntityFrameworkCore.Relational.nuspec",
         "lib/net451/Microsoft.EntityFrameworkCore.Relational.dll",
         "lib/net451/Microsoft.EntityFrameworkCore.Relational.xml",
         "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.dll",
-        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.xml",
-        "microsoft.entityframeworkcore.relational.1.1.2.nupkg.sha512",
-        "microsoft.entityframeworkcore.relational.nuspec"
+        "lib/netstandard1.3/Microsoft.EntityFrameworkCore.Relational.xml"
       ]
     },
     "Microsoft.EntityFrameworkCore.SqlServer/1.1.2": {
@@ -6839,10 +6839,12 @@
       ]
     },
     "System.Diagnostics.DiagnosticSource/4.3.1": {
-      "sha512": "11w6mvfalKO/TLvl6SnbVDMk6C/NJobMG9CgeR3rtrSIIe1yn8+mm6a4JZbCjDFRSaRnVBKTK/e8y+K+3SD18g==",
+      "sha512": "j72A3mwamUXPgDIU1TWyzea7yqz59+iO2cmXuyzvcfuszWGq9JRbWify1k33lLQophaXOIyhPkEevfP0k4M3wg==",
       "type": "package",
       "path": "System.Diagnostics.DiagnosticSource/4.3.1",
       "files": [
+        "System.Diagnostics.DiagnosticSource.4.3.1.nupkg.sha512",
+        "System.Diagnostics.DiagnosticSource.nuspec",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/net46/System.Diagnostics.DiagnosticSource.dll",
@@ -6852,9 +6854,7 @@
         "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.dll",
         "lib/netstandard1.3/System.Diagnostics.DiagnosticSource.xml",
         "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.dll",
-        "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.xml",
-        "system.diagnostics.diagnosticsource.4.3.1.nupkg.sha512",
-        "system.diagnostics.diagnosticsource.nuspec"
+        "lib/portable-net45+win8+wpa81/System.Diagnostics.DiagnosticSource.xml"
       ]
     },
     "System.Diagnostics.FileVersionInfo/4.0.0": {
