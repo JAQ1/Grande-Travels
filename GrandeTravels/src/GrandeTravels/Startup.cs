@@ -7,6 +7,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+
+using GrandeTravels.Services;
+using GrandeTravels.Models;
 
 namespace GrandeTravels
 {
@@ -33,10 +38,25 @@ namespace GrandeTravels
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMvc();
+
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
-            services.AddMvc();
+            services.AddIdentity<User, IdentityRole>
+                (
+                config =>
+                {
+                    //config.Password.RequireNonAlphanumeric = false;
+                    //config.Password.RequiredLength = 4;
+                    //config.Password.RequireDigit = false;
+                    //config.Cookies.ApplicationCookie.AccessDeniedPath = "/Account/AccessDenied";
+                    //config.SignIn.RequireConfirmedEmail = true;
+                }
+
+                ).AddEntityFrameworkStores<MyDbContext>().AddDefaultTokenProviders();
+            services.AddDbContext<MyDbContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +80,8 @@ namespace GrandeTravels
             app.UseApplicationInsightsExceptionTelemetry();
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UseMvc(routes =>
             {
