@@ -51,11 +51,9 @@ namespace GrandeTravels.Controllers
                     }
                     else
                     {
+                        foreach (var error in res.Errors)
                         {
-                            foreach (var error in res.Errors)
-                            {
-                                ModelState.AddModelError("", error.Description);
-                            }
+                            ModelState.AddModelError("", error.Description);
                         }
                     }
                 }
@@ -74,6 +72,34 @@ namespace GrandeTravels.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                var res = await _signInManager.PasswordSignInAsync(vm.Username, vm.Password, vm.RememberMe, lockoutOnFailure: false);
+
+                if (res.Succeeded)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return View(vm);
+                }
+            }
+
+            return View(vm);
+            
         }
     }
 }
