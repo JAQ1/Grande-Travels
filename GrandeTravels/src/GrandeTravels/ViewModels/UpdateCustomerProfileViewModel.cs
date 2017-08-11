@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace GrandeTravels.Models
+namespace GrandeTravels.ViewModels
 {
-    public class CustomerProfile
+    public class UpdateCustomerProfileViewModel
     {
-        public int CustomerProfileID { get; set; }
-        public string UserID { get; set; }
+        public string Title { get; set; }
         public string DisplayName { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
