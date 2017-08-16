@@ -31,6 +31,8 @@ namespace GrandeTravels.Controllers
         public async Task<IActionResult> UpdateCustomerProfile()
         {
             UpdateCustomerProfileViewModel vm = new UpdateCustomerProfileViewModel();
+            vm.SavedStatus = null;
+
             try
             {
                 User user = await _userManager.FindByNameAsync(User.Identity.Name);
@@ -50,6 +52,7 @@ namespace GrandeTravels.Controllers
                     }
                     else
                     {
+                        vm.DisplayName = user.UserName;
                         vm.Title = "Welcome to your new Profile!";
                         
                     }
@@ -61,13 +64,59 @@ namespace GrandeTravels.Controllers
                     RedirectToAction("SignUp", "Account");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
                 throw;
             }
             
             return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> UpdateCustomerProfile(UpdateCustomerProfileViewModel vm)
+        {
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            CustomerProfile tempProfile = new CustomerProfile();
+            tempProfile.DisplayName = vm.DisplayName;
+            tempProfile.FirstName = vm.FirstName;
+            tempProfile.LastName = vm.LastName;
+            tempProfile.Email = vm.Email;
+            tempProfile.Phone = vm.Phone;
+            tempProfile.UserID = user.Id;
+
+            CustomerProfile custProfile = _customerProfileRepo.GetSingle(p => p.UserID == user.Id);
+
+            try
+            {
+                if (custProfile != null)
+                {
+                    //keep the existing profile ID
+                    custProfile.DisplayName = tempProfile.DisplayName;
+                    custProfile.FirstName = tempProfile.FirstName;
+                    custProfile.LastName = tempProfile.LastName;
+                    custProfile.Email = tempProfile.Email;
+                    custProfile.Phone = tempProfile.Phone;
+
+                    _customerProfileRepo.Update(custProfile);
+                }
+                else
+                {
+                    _customerProfileRepo.Create(tempProfile);
+                }
+
+                vm.SavedStatus = "Your detials were successfully saved!";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                vm.SavedStatus = "Something went wrong with saving your details :/";
+                throw;
+            }
+            
+
+            return View(vm);
         }
     }
 }

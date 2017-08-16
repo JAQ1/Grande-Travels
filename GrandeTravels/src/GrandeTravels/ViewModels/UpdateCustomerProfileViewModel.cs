@@ -14,5 +14,6 @@ namespace GrandeTravels.ViewModels
         public string Email { get; set; }
         public int Phone { get; set; }
         public string DisplayPhotoPath { get; set; }
+        public string SavedStatus { get; set; }
     }
 }
