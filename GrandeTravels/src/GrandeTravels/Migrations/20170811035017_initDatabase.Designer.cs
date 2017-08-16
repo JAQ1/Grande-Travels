@@ -8,7 +8,7 @@ using GrandeTravels.Services;
 namespace GrandeTravels.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20170809235228_initDatabase")]
+    [Migration("20170811035017_initDatabase")]
     partial class initDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,8 +19,14 @@ namespace GrandeTravels.Migrations
 
             modelBuilder.Entity("GrandeTravels.Models.CustomerProfile", b =>
                 {
-                    b.Property<int>("CustomerProfileId")
+                    b.Property<int>("CustomerProfileID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DisplayName");
+
+                    b.Property<string>("DisplayPhotoPath");
+
+                    b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
@@ -28,9 +34,9 @@ namespace GrandeTravels.Migrations
 
                     b.Property<int>("Phone");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserID");
 
-                    b.HasKey("CustomerProfileId");
+                    b.HasKey("CustomerProfileID");
 
                     b.ToTable("TblCustProfile");
                 });

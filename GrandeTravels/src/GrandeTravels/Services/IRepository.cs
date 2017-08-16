@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GrandeTravels.Services
 {
-    interface IRepository<T>
+    public interface IRepository<T>
     {
         void Create(T entity);
 

@@ -13,16 +13,19 @@ namespace GrandeTravels.Migrations
                 name: "TblCustProfile",
                 columns: table => new
                 {
-                    CustomerProfileId = table.Column<int>(nullable: false)
+                    CustomerProfileID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DisplayName = table.Column<string>(nullable: true),
+                    DisplayPhotoPath = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     Phone = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    UserID = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TblCustProfile", x => x.CustomerProfileId);
+                    table.PrimaryKey("PK_TblCustProfile", x => x.CustomerProfileID);
                 });
 
             migrationBuilder.CreateTable(

@@ -1,0 +1,51 @@
+﻿@model UpdateCustomerProfileViewModel
+
+<h1>@Model.Title</h1>
+
+<form asp-action="UpdateCustomerProfile" asp-controller="Profile" method="post">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+    <div class="form-group">
+        <label asp-for="DisplayName"></label>
+        <input type="text" asp-for="DisplayName" class="form-control" />
+        <br />
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="FirstName"></label>
+        <input type="text" asp-for="FirstName" class="form-control" />
+        <br />
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="LastName"></label>
+        <input type="text" asp-for="LastName" class="form-control" />
+        <br />
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input type="text" asp-for="Email" class="form-control" />
+        <br />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Phone"></label>
+        <input type="text" asp-for="Phone" class="form-control" />
+        <br />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DisplayPhotoPath"></label>
+        <input type="text" asp-for="DisplayPhotoPath" class="form-control" />
+        <br />
+    </div>
+
+
+    <button type="submit" class="btn btn-danger">Submit</button>
+</form>
+
+<h5>@Model.SavedStatus</h5>

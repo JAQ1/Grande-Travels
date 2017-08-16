@@ -18,8 +18,14 @@ namespace GrandeTravels.Migrations
 
             modelBuilder.Entity("GrandeTravels.Models.CustomerProfile", b =>
                 {
-                    b.Property<int>("CustomerProfileId")
+                    b.Property<int>("CustomerProfileID")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DisplayName");
+
+                    b.Property<string>("DisplayPhotoPath");
+
+                    b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
@@ -27,9 +33,9 @@ namespace GrandeTravels.Migrations
 
                     b.Property<int>("Phone");
 
-                    b.Property<string>("UserId");
+                    b.Property<string>("UserID");
 
-                    b.HasKey("CustomerProfileId");
+                    b.HasKey("CustomerProfileID");
 
                     b.ToTable("TblCustProfile");
                 });
