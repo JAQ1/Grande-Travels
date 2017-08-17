@@ -23,7 +23,11 @@ namespace GrandeTravels.ViewModels
         [Required]
         public string LastName { get; set; }
 
-        [DataType(DataType.EmailAddress, ErrorMessage = "Invalid email address")]
+
+        //[DataType(DataType.EmailAddress, ErrorMessage = "Invalid email address")]
+        [RegularExpression(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*"
+            + "@"
+            + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$", ErrorMessage = "Invalid Email")]
         [Required]
         public string Email { get; set; }
 
