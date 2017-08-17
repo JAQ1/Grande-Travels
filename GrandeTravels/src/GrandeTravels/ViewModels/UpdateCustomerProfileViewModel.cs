@@ -11,15 +11,16 @@ namespace GrandeTravels.ViewModels
     {
         public string Title { get; set; }
 
-        [StringLength(25, MinimumLength = 3)]
+        [StringLength(25, MinimumLength = 3, ErrorMessage = "Display name must be between 2 and 50 Characters long")]
         public string DisplayName { get; set; }
 
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "First name must be between 2 and 50 LETTERS long")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "First name must only contain letters")]
         [Required]
         public string FirstName { get; set; }
 
-        [DataType(DataType.Text)]
-        [StringLength(50, MinimumLength = 3)]
+        [StringLength(50, MinimumLength = 2, ErrorMessage = "Last name must be between 2 and 50 LETTERS long")]
+        [RegularExpression(@"^[a-zA-Z]+$", ErrorMessage = "Last name must only contain letters")]
         [Required]
         public string LastName { get; set; }
 
