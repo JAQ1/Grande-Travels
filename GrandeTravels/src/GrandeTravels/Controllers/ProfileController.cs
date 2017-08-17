@@ -14,13 +14,13 @@ using GrandeTravels.ViewModels;
 
 namespace GrandeTravels.Controllers
 {
-    public class ProfileController : Controller
+    public class CustomerProfileController : Controller
     {
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
         private IRepository<CustomerProfile> _customerProfileRepo;
 
-        public ProfileController(UserManager<User> userManager, SignInManager<User> signInManager, IRepository<CustomerProfile> customerProfileRepo)
+        public CustomerProfileController(UserManager<User> userManager, SignInManager<User> signInManager, IRepository<CustomerProfile> customerProfileRepo)
         {
             _userManager = userManager;
             _signInManager = signInManager;
