@@ -9,18 +9,20 @@ using Microsoft.AspNetCore.Identity;
 using GrandeTravels.Models;
 using GrandeTravels.Services;
 using GrandeTravels.ViewModels;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GrandeTravels.Controllers
 {
-    public class CustomerProfileController : Controller
+    public class ProfileController : Controller
     {
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
         private IRepository<CustomerProfile> _customerProfileRepo;
 
-        public CustomerProfileController(UserManager<User> userManager, SignInManager<User> signInManager, IRepository<CustomerProfile> customerProfileRepo)
+        public ProfileController(UserManager<User> userManager, SignInManager<User> signInManager, IRepository<CustomerProfile> customerProfileRepo)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -54,7 +56,6 @@ namespace GrandeTravels.Controllers
                     {
                         vm.DisplayName = user.UserName;
                         vm.Title = "Welcome to your new Profile!";
-                        
                     }
 
                     return View(vm);
@@ -74,7 +75,7 @@ namespace GrandeTravels.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> UpdateCustomerProfile(UpdateCustomerProfileViewModel vm)
+        public async Task<ActionResult> UpdateCustomerProfile(UpdateCustomerProfileViewModel vm, IFormFile photoLocation)
         {
             vm.SavedStatus = null;
 
@@ -110,6 +111,12 @@ namespace GrandeTravels.Controllers
                         _customerProfileRepo.Create(tempProfile);
                     }
 
+                    if (vm.DisplayPhotoPath != null)
+                    {
+                        // full path to file in temp location
+                        var filePath = Path.GetTempFileName();
+                    }
+
                     vm.SavedStatus = "Your detials were successfully saved!";
                 }
                 catch (Exception ex)
@@ -118,6 +125,8 @@ namespace GrandeTravels.Controllers
                     vm.SavedStatus = "Something went wrong with saving your details :/";
                     throw;
                 }
+
+
             }
 
             return View(vm);

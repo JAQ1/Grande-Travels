@@ -12,6 +12,7 @@ namespace GrandeTravels.ViewModels
         public string Title { get; set; }
 
         [StringLength(25, MinimumLength = 3, ErrorMessage = "Display name must be between 2 and 50 Characters long")]
+        [Required]
         public string DisplayName { get; set; }
 
         [StringLength(50, MinimumLength = 2, ErrorMessage = "First name must be between 2 and 50 LETTERS long")]
