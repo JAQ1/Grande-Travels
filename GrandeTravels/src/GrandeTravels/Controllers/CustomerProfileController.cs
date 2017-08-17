@@ -76,45 +76,49 @@ namespace GrandeTravels.Controllers
         [HttpPost]
         public async Task<ActionResult> UpdateCustomerProfile(UpdateCustomerProfileViewModel vm)
         {
-            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            vm.SavedStatus = null;
 
-            CustomerProfile tempProfile = new CustomerProfile();
-            tempProfile.DisplayName = vm.DisplayName;
-            tempProfile.FirstName = vm.FirstName;
-            tempProfile.LastName = vm.LastName;
-            tempProfile.Email = vm.Email;
-            tempProfile.Phone = vm.Phone;
-            tempProfile.UserID = user.Id;
-
-            CustomerProfile custProfile = _customerProfileRepo.GetSingle(p => p.UserID == user.Id);
-
-            try
+            if (ModelState.IsValid)
             {
-                if (custProfile != null)
-                {
-                    //keep the existing profile ID
-                    custProfile.DisplayName = tempProfile.DisplayName;
-                    custProfile.FirstName = tempProfile.FirstName;
-                    custProfile.LastName = tempProfile.LastName;
-                    custProfile.Email = tempProfile.Email;
-                    custProfile.Phone = tempProfile.Phone;
+                User user = await _userManager.FindByNameAsync(User.Identity.Name);
 
-                    _customerProfileRepo.Update(custProfile);
-                }
-                else
-                {
-                    _customerProfileRepo.Create(tempProfile);
-                }
+                CustomerProfile tempProfile = new CustomerProfile();
+                tempProfile.DisplayName = vm.DisplayName;
+                tempProfile.FirstName = vm.FirstName;
+                tempProfile.LastName = vm.LastName;
+                tempProfile.Email = vm.Email;
+                tempProfile.Phone = vm.Phone;
+                tempProfile.UserID = user.Id;
 
-                vm.SavedStatus = "Your detials were successfully saved!";
+                CustomerProfile custProfile = _customerProfileRepo.GetSingle(p => p.UserID == user.Id);
+
+                try
+                {
+                    if (custProfile != null)
+                    {
+                        //keep the existing profile ID
+                        custProfile.DisplayName = tempProfile.DisplayName;
+                        custProfile.FirstName = tempProfile.FirstName;
+                        custProfile.LastName = tempProfile.LastName;
+                        custProfile.Email = tempProfile.Email;
+                        custProfile.Phone = tempProfile.Phone;
+
+                        _customerProfileRepo.Update(custProfile);
+                    }
+                    else
+                    {
+                        _customerProfileRepo.Create(tempProfile);
+                    }
+
+                    vm.SavedStatus = "Your detials were successfully saved!";
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    vm.SavedStatus = "Something went wrong with saving your details :/";
+                    throw;
+                }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                vm.SavedStatus = "Something went wrong with saving your details :/";
-                throw;
-            }
-            
 
             return View(vm);
         }

@@ -218,10 +218,12 @@ C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Packag
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Program.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Startup.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Controllers\AccountController.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Controllers\CustomerProfileController.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Controllers\HomeController.cs
-C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Controllers\ProfileController.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170811035017_initDatabase.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170811035017_initDatabase.Designer.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170817025546_phonePropToString.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170817025546_phonePropToString.Designer.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\MyDbContextModelSnapshot.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\Customer.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\CustomerProfile.cs
