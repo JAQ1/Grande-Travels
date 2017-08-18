@@ -74,5 +74,51 @@ namespace GrandeTravels.Controllers
 
             return View(vm);
         }
+
+        [HttpGet]
+        public IActionResult UpdatePackage(int id)
+        {
+            Package selectedPackage = _packageRepo.GetSingle(p => p.ID == id);
+
+            if (selectedPackage != null)
+            {
+                UpdatePackageViewModel vm = new UpdatePackageViewModel();
+
+                vm.Package = selectedPackage;
+                vm.Name = selectedPackage.Name;
+                vm.Description = selectedPackage.Description;
+                vm.Location = selectedPackage.Location;
+                vm.Price = selectedPackage.Price;
+                vm.Package = selectedPackage;
+
+                return View(vm);
+            }
+
+            return RedirectToAction("Index", "Package");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePackage(UpdatePackageViewModel vm, int id)
+        {
+            User loggedUser = await _userManager.FindByNameAsync(User.Identity.Name);
+            
+            Package pack = _packageRepo.GetSingle(p => p.ID == id);
+
+            if (ModelState.IsValid)
+            {
+
+                pack.Name = vm.Name;
+                pack.Description = vm.Description;
+                pack.Location = vm.Location;
+                pack.Price = vm.Price;
+
+                _packageRepo.Update(pack);
+
+                return RedirectToAction("Index", "Package");
+
+            }
+
+            return View(vm);
+        }
     }
 }

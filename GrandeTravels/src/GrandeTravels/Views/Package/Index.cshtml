@@ -5,7 +5,12 @@
 <ul>
     @foreach (var item in Model.Packages)
     {   
-        <li><a>@item.Name</a><i>@item.Price</i></li>
+        <li><a>@item.Name</a>  <i>$@item.Price</i>  
+            @if (User.IsInRole("TravelProvider"))
+            {
+                <p><a asp-action="UpdatePackage" asp-controller="Package" asp-route-id="@item.ID">Update</a> | <a>Delete</a> </p>
+            }
+        </li>
     }
 </ul>
 
