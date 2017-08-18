@@ -1,0 +1,45 @@
+﻿@model AddPackageViewModel
+
+<h1>Add Package</h1>
+
+<form asp-action="AddPackage" asp-controller="Package" method="post" enctype="multipart/form-data">
+    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input type="text" asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+        <br />
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Description"></label>
+        <input type="text" asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+        <br />
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="Location"></label>
+        <input type="text" asp-for="Location" class="form-control" />
+        <span asp-validation-for="Location" class="text-danger"></span>
+        <br />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input type="text" asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+        <br />
+    </div>
+
+    @*<div class="form-group">
+        <label asp-for="PackageImage"></label>
+        <input type="file" asp-for="PackageImage" class="form-control" />
+        <span asp-validation-for="PackageImage" class="text-danger"></span>
+    </div>*@
+
+    <button type="submit" class="btn btn-danger">Submit</button>
+</form>

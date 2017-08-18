@@ -44,7 +44,15 @@ namespace GrandeTravels.Controllers
 
                     if (res.Succeeded)
                     {
-                        await _userManager.AddToRoleAsync(user, "Customer");
+                        if (vm.UserRole == "customer") 
+                        {
+                            await _userManager.AddToRoleAsync(user, "Customer");
+                        }
+                        else if (vm.UserRole == "travel-provider")
+                        {
+                            await _userManager.AddToRoleAsync(user, "TravelProvider");
+                        }
+
                         await _signInManager.SignInAsync(user, false);
 
                         return RedirectToAction("Index", "Home");

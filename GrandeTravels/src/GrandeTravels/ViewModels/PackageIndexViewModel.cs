@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using GrandeTravels.Models;
 
-namespace GrandeTravels.Models
+namespace GrandeTravels.ViewModels
 {
-    public class User : IdentityUser
+    public class PackageIndexViewModel
     {
+        public int PackageCount { get; set; }
         public IEnumerable<Package> Packages { get; set; }
     }
 }

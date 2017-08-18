@@ -41,6 +41,7 @@ namespace GrandeTravels
             services.AddMvc();
 
             services.AddScoped<IRepository<CustomerProfile>, BaseRepository<CustomerProfile>>();
+            services.AddScoped<IRepository<Package>, BaseRepository<Package>>();
 
 
             // Add framework services.
@@ -50,6 +51,8 @@ namespace GrandeTravels
                 (
                 config =>
                 {
+                    //FIX LATER
+
                     //config.Password.RequireNonAlphanumeric = false;
                     //config.Password.RequiredLength = 4;
                     //config.Password.RequireDigit = false;
