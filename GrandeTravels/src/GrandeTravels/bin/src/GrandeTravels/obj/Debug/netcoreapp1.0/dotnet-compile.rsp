@@ -224,6 +224,8 @@ C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrat
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170818015833_initDatabase.Designer.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170818021146_removeImageCol.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170818021146_removeImageCol.Designer.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170818041533_addActiveStatusToPackage.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170818041533_addActiveStatusToPackage.Designer.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\MyDbContextModelSnapshot.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\CustomerProfile.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\Package.cs
@@ -236,3 +238,4 @@ C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewMo
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\PackageIndexViewModel.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\SignUpViewModel.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\UpdateCustomerProfileViewModel.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\UpdatePackageViewModel.cs

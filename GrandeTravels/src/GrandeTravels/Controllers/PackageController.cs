@@ -36,7 +36,17 @@ namespace GrandeTravels.Controllers
             PackageIndexViewModel vm = new PackageIndexViewModel();
             if (allPackages != null)
             {
-                vm.Packages = allPackages;
+                List<Package> activePackages = new List<Package>();
+
+                foreach (var item in allPackages)
+                {
+                    if (item.ActiveStatus != "Inactive")
+                    {
+                        activePackages.Add(item);
+                    }
+                }
+
+                vm.Packages = activePackages;
             }
 
             return View(vm);
@@ -62,7 +72,9 @@ namespace GrandeTravels.Controllers
                     Description = vm.Description,
                     Location = vm.Location,
                     Price = vm.Price,
-                    UserId = loggedUser.Id
+                    UserId = loggedUser.Id,
+                    TravelProviderName = User.Identity.Name
+                    
 
                 };
 
@@ -107,14 +119,33 @@ namespace GrandeTravels.Controllers
                 pack.Description = vm.Description;
                 pack.Location = vm.Location;
                 pack.Price = vm.Price;
-
-
+                
                 _packageRepo.Update(pack);
 
                 return RedirectToAction("Index", "Package");
             }
 
             return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult DiscontinuePackage(int id)
+        {
+            Package pack = _packageRepo.GetSingle(p => p.ID == id);
+
+            try
+            {
+                pack.ActiveStatus = "Inactive";
+                _packageRepo.Update(pack);
+
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return View();
+                throw;
+            }
         }
     }
 }

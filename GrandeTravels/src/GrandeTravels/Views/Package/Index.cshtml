@@ -8,7 +8,10 @@
         <li><a>@item.Name</a>  <i>$@item.Price</i>  
             @if (User.IsInRole("TravelProvider"))
             {
-                <p><a asp-action="UpdatePackage" asp-controller="Package" asp-route-id="@item.ID">Update</a> | <a>Delete</a> </p>
+                <a asp-action="UpdatePackage" asp-controller="Package" asp-route-id="@item.ID">Update</a>
+                <form asp-action="DiscontinuePackage" asp-controller="Package" asp-route-id="@item.ID" method="post">
+                    <button type="submit">Delete</button>
+                </form>
             }
         </li>
     }

@@ -21,5 +21,6 @@ namespace GrandeTravels.Models
         //public IFormFile PackageImage { get; set; }
         public string UserId { get; set; }
         public string TravelProviderName { get; set; }
+        public string ActiveStatus { get; set; }
     }
 }
