@@ -1,0 +1,14 @@
+﻿@model PackageIndexViewModel
+
+<h1>Travel Packages</h1>
+
+<ul>
+    @foreach (var item in Model.Packages)
+    {   
+        <li><a>@item.Name</a><i>@item.Price</i></li>
+    }
+</ul>
+
+<h5>Number of Packages: <strong>@Model.PackageCount</strong></h5>
+
+<a asp-action="AddPackage" asp-controller="Package">Add</a>
