@@ -40,6 +40,35 @@ namespace GrandeTravels.Migrations
                     b.ToTable("TblCustProfile");
                 });
 
+            modelBuilder.Entity("GrandeTravels.Models.Package", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 225);
+
+                    b.Property<string>("Location")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasAnnotation("MaxLength", 50);
+
+                    b.Property<double>("Price");
+
+                    b.Property<string>("TravelProviderName");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TblPackage");
+                });
+
             modelBuilder.Entity("GrandeTravels.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -88,24 +117,6 @@ namespace GrandeTravels.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("GrandeTravels.Package", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Details");
-
-                    b.Property<string>("Location");
-
-                    b.Property<string>("Name");
-
-                    b.Property<double>("Price");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("TblPackage");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -212,6 +223,13 @@ namespace GrandeTravels.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("GrandeTravels.Models.Package", b =>
+                {
+                    b.HasOne("GrandeTravels.Models.User")
+                        .WithMany("Packages")
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

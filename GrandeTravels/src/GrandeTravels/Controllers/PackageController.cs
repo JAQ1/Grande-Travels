@@ -47,9 +47,27 @@ namespace GrandeTravels.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPackage(AddPackageViewModel vm, IFormFile photoLocation)
+        public async Task<IActionResult> AddPackage(AddPackageViewModel vm)
         {
+            User loggedUser = await _userManager.FindByNameAsync(User.Identity.Name);
 
+            if (ModelState.IsValid)
+            {
+                Package newPackage = new Package()
+                {
+                    Name = vm.Name,
+                    Description = vm.Description,
+                    Location = vm.Location,
+                    Price = vm.Price,
+                    UserId = loggedUser.Id
+
+                };
+
+                _packageRepo.Create(newPackage);
+
+                return RedirectToAction("Index", "Package");
+
+            }
 
             return View(vm);
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace GrandeTravels.Models
     public class Package
     {
         public int ID { get; set; }
-        public int TravelProviderID { get; set; }
 
         [Required]
         [MaxLength(50), MinLength(5)]
@@ -26,8 +26,9 @@ namespace GrandeTravels.Models
         [Required]
         [DataType(DataType.Currency)]
         public double Price { get; set; }
-
-        [Required]
-        public byte[] PackageImage { get; set; }
+        
+        //public IFormFile PackageImage { get; set; }
+        public string UserId { get; set; }
+        public string TravelProviderName { get; set; }
     }
 }
