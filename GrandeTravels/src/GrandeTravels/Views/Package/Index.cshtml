@@ -11,4 +11,7 @@
 
 <h5>Number of Packages: <strong>@Model.PackageCount</strong></h5>
 
-<a asp-action="AddPackage" asp-controller="Package">Add</a>
+@if (User.IsInRole("TravelProvider"))
+{
+    <a asp-action="AddPackage" asp-controller="Package">Add</a>
+}

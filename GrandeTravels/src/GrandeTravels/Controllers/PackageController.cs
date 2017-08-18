@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 using GrandeTravels.ViewModels;
 using GrandeTravels.Models;
@@ -14,6 +15,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace GrandeTravels.Controllers
 {
+    [Authorize(Roles ="TravelProvider")]
     public class PackageController : Controller
     {
         private IRepository<Package> _packageRepo;
@@ -26,6 +28,7 @@ namespace GrandeTravels.Controllers
         }
 
         // GET: /<controller>/
+        [AllowAnonymous]
         public IActionResult Index()
         {
             IEnumerable<Package> allPackages = _packageRepo.GetAll();
