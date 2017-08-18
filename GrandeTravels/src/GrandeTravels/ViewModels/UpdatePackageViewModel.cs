@@ -10,7 +10,7 @@ namespace GrandeTravels.ViewModels
 {
     public class UpdatePackageViewModel
     {
-        public Package Package { get; set; }
+        public int PackageID { get; set; }
 
         [Required]
         [MaxLength(50), MinLength(5)]

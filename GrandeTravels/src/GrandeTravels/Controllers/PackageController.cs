@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace GrandeTravels.Controllers
 {
-    [Authorize(Roles ="TravelProvider")]
+    [Authorize(Roles = "TravelProvider")]
     public class PackageController : Controller
     {
         private IRepository<Package> _packageRepo;
@@ -45,7 +45,7 @@ namespace GrandeTravels.Controllers
         [HttpGet]
         public IActionResult AddPackage()
         {
-            
+
             return View();
         }
 
@@ -84,12 +84,11 @@ namespace GrandeTravels.Controllers
             {
                 UpdatePackageViewModel vm = new UpdatePackageViewModel();
 
-                vm.Package = selectedPackage;
+                vm.PackageID = selectedPackage.ID;
                 vm.Name = selectedPackage.Name;
                 vm.Description = selectedPackage.Description;
                 vm.Location = selectedPackage.Location;
                 vm.Price = selectedPackage.Price;
-                vm.Package = selectedPackage;
 
                 return View(vm);
             }
@@ -98,24 +97,21 @@ namespace GrandeTravels.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdatePackage(UpdatePackageViewModel vm, int id)
+        public IActionResult UpdatePackage(UpdatePackageViewModel vm, int id)
         {
-            User loggedUser = await _userManager.FindByNameAsync(User.Identity.Name);
-            
-            Package pack = _packageRepo.GetSingle(p => p.ID == id);
-
             if (ModelState.IsValid)
             {
+                Package pack = _packageRepo.GetSingle(p => p.ID == id);
 
                 pack.Name = vm.Name;
                 pack.Description = vm.Description;
                 pack.Location = vm.Location;
                 pack.Price = vm.Price;
 
+
                 _packageRepo.Update(pack);
 
                 return RedirectToAction("Index", "Package");
-
             }
 
             return View(vm);
