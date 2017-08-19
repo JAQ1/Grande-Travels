@@ -147,5 +147,21 @@ namespace GrandeTravels.Controllers
                 throw;
             }
         }
+
+        [HttpGet]
+        public IActionResult PackageDetails(int id)
+        {
+            Package pack = _packageRepo.GetSingle(p => p.ID == id);
+
+            if (pack != null)
+            {
+                PackageDetailsViewModel vm = new PackageDetailsViewModel();
+                vm.Package = pack;
+
+                return View(vm);
+            }
+
+            return RedirectToAction("Index");
+        }
     }
 }
