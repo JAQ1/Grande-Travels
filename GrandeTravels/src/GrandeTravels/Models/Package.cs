@@ -22,6 +22,7 @@ namespace GrandeTravels.Models
         public string UserId { get; set; }
         public string TravelProviderName { get; set; }
         public string ActiveStatus { get; set; }
-        IEnumerable<Booking> Bookings { get; set; }
+        public IEnumerable<Feedback> Feedbacks { get; set; }
+        public IEnumerable<Booking> Bookings { get; set; }
     }
 }
