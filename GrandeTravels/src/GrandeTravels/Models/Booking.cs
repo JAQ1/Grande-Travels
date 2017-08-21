@@ -9,7 +9,8 @@ namespace GrandeTravels.Models
     {
         public int BookingID { get; set; }
 
-        public DateTime BookingDate { get; set; }
+        public DateTime ArrivalDate { get; set; }
+        public DateTime DepartureDate { get; set; }
 
         public int PackageID { get; set; }
 
@@ -17,8 +18,6 @@ namespace GrandeTravels.Models
 
         public string UserID { get; set; }
         public User MyUser { get; set; }
-
-        public string Name { get; set; }
 
         public int People { get; set; }
 
