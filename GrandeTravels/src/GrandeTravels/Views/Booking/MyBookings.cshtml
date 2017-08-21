@@ -1,0 +1,10 @@
+﻿@model MyBookingsViewModel
+
+<h1>My Bookings</h1>
+
+<ul>
+    @foreach (var item in Model.MyBookings)
+    {
+        <li>@item.PackageName <a>leave feedback</a></li>
+    }
+</ul>
