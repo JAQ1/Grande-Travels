@@ -6,7 +6,7 @@
 <h4>$@Model.Package.Price</h4>
 
 <form asp-action="BookPackage" asp-controller="Booking" asp-route-id="@Model.Package.ID" method="post">
-    
+
     <div class="form-group">
         <label asp-for="People"></label>
         <input asp-for="People" class="form-control" />
@@ -32,6 +32,4 @@
     <button type="submit">Book Now</button>
 
 </form>
-
-
 

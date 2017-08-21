@@ -17,11 +17,11 @@ namespace GrandeTravels.Models
         public Package Package { get; set; }
 
         public string UserID { get; set; }
-        public User MyUser { get; set; }
+        public User User { get; set; }
 
         public int People { get; set; }
 
-        public int TotalCost { get; set; }
+        public double TotalCost { get; set; }
 
         public string PackageName { get; set; }
     }

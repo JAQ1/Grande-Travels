@@ -8,9 +8,10 @@ using GrandeTravels.Services;
 namespace GrandeTravels.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170821021323_uptBookingClass")]
+    partial class uptBookingClass
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -31,7 +32,7 @@ namespace GrandeTravels.Migrations
 
                     b.Property<int>("People");
 
-                    b.Property<double>("TotalCost");
+                    b.Property<int>("TotalCost");
 
                     b.Property<string>("UserID");
 
@@ -257,7 +258,7 @@ namespace GrandeTravels.Migrations
                         .HasForeignKey("PackageID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GrandeTravels.Models.User", "User")
+                    b.HasOne("GrandeTravels.Models.User", "MyUser")
                         .WithMany("Bookings")
                         .HasForeignKey("UserID");
                 });

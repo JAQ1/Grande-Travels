@@ -18,7 +18,7 @@ namespace GrandeTravels.Controllers
         private IRepository<Booking> _bookingRepo;
         private IRepository<Package> _packageRepo;
 
-        public BookingController(UserManager<User> userManager, 
+        public BookingController(UserManager<User> userManager,
                                 IRepository<Booking> bookingRepo,
                                 IRepository<Package> packageRepo)
         {
@@ -39,6 +39,28 @@ namespace GrandeTravels.Controllers
             BookPackageViewModel vm = new BookPackageViewModel();
             vm.Package = _packageRepo.GetSingle(p => p.ID == id);
 
+            return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> BookPackage(BookPackageViewModel vm, int id)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+                Booking newBooking = new Booking();
+
+                newBooking.ArrivalDate = vm.ArrivalDate;
+                newBooking.DepartureDate = vm.DepartureDate;
+                newBooking.People = vm.People;
+                newBooking.TotalCost = vm.TotalCost;
+                newBooking.PackageID = id;
+                newBooking.UserID = user.Id;
+
+                _bookingRepo.Create(newBooking);
+                return RedirectToAction("Index", "Home");
+            }
             return View(vm);
         }
     }
