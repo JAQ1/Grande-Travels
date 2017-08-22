@@ -53,9 +53,10 @@ namespace GrandeTravels.Controllers
         [HttpPost]
         public async Task<ActionResult> LeaveFeedback(LeaveFeedbackViewModel vm, int id)
         {
+            Package package = _packageRepo.GetSingle(p => p.ID == id);
+
             if (ModelState.IsValid)
             {
-                Package package = _packageRepo.GetSingle(p => p.ID == id);
                 User user = await _userManager.FindByNameAsync(User.Identity.Name);
                 Feedback feedback = new Feedback()
                 {
@@ -72,6 +73,7 @@ namespace GrandeTravels.Controllers
                 return RedirectToAction("MyBookings", "Booking");
             }
 
+            vm.Package = package;
             return View(vm);
 
         }

@@ -66,10 +66,9 @@ namespace GrandeTravels.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPackage(AddPackageViewModel vm)
         {
-            User loggedUser = await _userManager.FindByNameAsync(User.Identity.Name);
-
             if (ModelState.IsValid)
             {
+                User loggedUser = await _userManager.FindByNameAsync(User.Identity.Name);
                 Package newPackage = new Package()
                 {
                     Name = vm.Name,
@@ -78,8 +77,6 @@ namespace GrandeTravels.Controllers
                     Price = vm.Price,
                     UserId = loggedUser.Id,
                     TravelProviderName = User.Identity.Name
-                    
-
                 };
 
                 _packageRepo.Create(newPackage);
