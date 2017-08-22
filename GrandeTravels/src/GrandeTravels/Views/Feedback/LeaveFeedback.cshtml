@@ -4,7 +4,7 @@
 
 <h2>@Model.Package.Name</h2>
 
-<form asp-action="LeaveFeedback" asp-controller="Feedback" method="post">
+<form asp-action="LeaveFeedback" asp-controller="Feedback" asp-route-id="@Model.Package.ID" method="post">
     
     <div class="form-group">
         <label asp-for="Comment"></label>
