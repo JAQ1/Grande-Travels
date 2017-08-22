@@ -19,11 +19,15 @@ namespace GrandeTravels.Controllers
     public class PackageController : Controller
     {
         private IRepository<Package> _packageRepo;
+        private IRepository<Feedback> _feedbackRepo;
         private UserManager<User> _userManager;
 
-        public PackageController(IRepository<Package> packageRepo, UserManager<User> userManager)
+        public PackageController(IRepository<Package> packageRepo,
+                                IRepository<Feedback> feedbackRepo,
+                                UserManager<User> userManager)
         {
             _packageRepo = packageRepo;
+            _feedbackRepo = feedbackRepo;
             _userManager = userManager;
         }
 
@@ -153,11 +157,13 @@ namespace GrandeTravels.Controllers
         public IActionResult PackageDetails(int id)
         {
             Package pack = _packageRepo.GetSingle(p => p.ID == id);
+            IEnumerable<Feedback> feedback = _feedbackRepo.Query(f => f.PackageID == id);
 
             if (pack != null)
             {
                 PackageDetailsViewModel vm = new PackageDetailsViewModel();
                 vm.Package = pack;
+                vm.PackageFeedback = feedback;
 
                 return View(vm);
             }

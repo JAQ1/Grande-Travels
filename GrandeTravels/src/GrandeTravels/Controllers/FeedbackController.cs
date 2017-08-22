@@ -8,12 +8,14 @@ using Microsoft.AspNetCore.Identity;
 using GrandeTravels.Services;
 using GrandeTravels.ViewModels;
 using GrandeTravels.Models;
+using Microsoft.AspNetCore.Authorization;
 
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GrandeTravels.Controllers
 {
+    [Authorize(Roles = "Customer")]
     public class FeedbackController : Controller
     {
         private UserManager<User> _userManager;
@@ -35,6 +37,7 @@ namespace GrandeTravels.Controllers
         {
             return View();
         }
+
 
         [HttpGet]
         public ActionResult LeaveFeedback(int id)
@@ -59,7 +62,9 @@ namespace GrandeTravels.Controllers
                     Comment = vm.Comment,
                     Rating = vm.Rating,
                     PackageID = package.ID,
-                    UserId = user.Id
+                    UserId = user.Id,
+                    UserName = user.UserName,
+                    Date = DateTime.Today
                 };
 
                 _feedbackRepo.Create(feedback);

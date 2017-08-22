@@ -9,5 +9,6 @@ namespace GrandeTravels.ViewModels
     public class PackageDetailsViewModel
     {
         public Package Package { get; set; }
+        public IEnumerable<Feedback> PackageFeedback { get; set; }
     }
 }

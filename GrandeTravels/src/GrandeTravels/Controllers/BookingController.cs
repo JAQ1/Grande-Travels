@@ -54,6 +54,7 @@ namespace GrandeTravels.Controllers
 
                 newBooking.ArrivalDate = vm.ArrivalDate;
                 newBooking.DepartureDate = vm.DepartureDate;
+                newBooking.Date = DateTime.Today;
                 newBooking.People = vm.People;
                 newBooking.TotalCost = vm.TotalCost;
                 newBooking.PackageID = id;

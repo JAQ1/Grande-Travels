@@ -12,6 +12,7 @@ namespace GrandeTravels.Models
         public DateTime DepartureDate { get; set; }
         public int People { get; set; }
         public double TotalCost { get; set; }
+        public DateTime Date { get; set; }
 
         public int PackageID { get; set; }
         public Package Package { get; set; }
