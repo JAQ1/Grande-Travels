@@ -6,4 +6,17 @@
 
 <p>@Model.Package.Description</p>
 
+<h5>Comments:</h5>
+
+<ul>
+    @foreach (var item in Model.PackageFeedback)
+    {
+        <li>
+            <strong>@item.UserName</strong> - @item.Rating Stars
+            <i>@item.Comment</i>
+            - @item.Date
+        </li>
+    }
+</ul>
+
 <a asp-action="BookPackage" asp-controller="Booking" asp-route-id="@Model.Package.ID">Book Now</a>

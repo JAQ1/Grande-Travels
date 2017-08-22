@@ -8,9 +8,10 @@ using GrandeTravels.Services;
 namespace GrandeTravels.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170822020011_addColTblBooking")]
+    partial class addColTblBooking
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -22,8 +23,6 @@ namespace GrandeTravels.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("ArrivalDate");
-
-                    b.Property<DateTime>("Date");
 
                     b.Property<DateTime>("DepartureDate");
 
@@ -77,15 +76,11 @@ namespace GrandeTravels.Migrations
 
                     b.Property<string>("Comment");
 
-                    b.Property<DateTime>("Date");
-
                     b.Property<int>("PackageID");
 
                     b.Property<int>("Rating");
 
                     b.Property<string>("UserId");
-
-                    b.Property<string>("UserName");
 
                     b.HasKey("ID");
 

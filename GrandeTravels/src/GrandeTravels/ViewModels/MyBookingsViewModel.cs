@@ -6,9 +6,8 @@ using GrandeTravels.Models;
 
 namespace GrandeTravels.ViewModels
 {
-    public class PackageDetailsViewModel
+    public class MyBookingsViewModel
     {
-        public Package Package { get; set; }
-        public IEnumerable<Feedback> PackageFeedback { get; set; }
+        public IEnumerable<Booking> MyBookings { get; set; }
     }
 }

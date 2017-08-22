@@ -1,0 +1,25 @@
+﻿@model LeaveFeedbackViewModel
+
+<h1>Leave Feedback</h1>
+
+<h2>@Model.Package.Name</h2>
+
+<form asp-action="LeaveFeedback" asp-controller="Feedback" asp-route-id="@Model.Package.ID" method="post">
+    
+    <div class="form-group">
+        <label asp-for="Comment"></label>
+        <input type="text" asp-for="Comment" class="form-control" />
+        <span asp-validation-for="Comment" class="text-danger"></span>
+        <br />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Rating"></label>
+        <input type="text" asp-for="Rating" class="form-control" />
+        <span asp-validation-for="Rating" class="text-danger"></span>
+        <br />
+    </div>
+
+    <button type="submit">Submit</button>
+
+</form>

@@ -19,11 +19,15 @@ namespace GrandeTravels.Controllers
     public class PackageController : Controller
     {
         private IRepository<Package> _packageRepo;
+        private IRepository<Feedback> _feedbackRepo;
         private UserManager<User> _userManager;
 
-        public PackageController(IRepository<Package> packageRepo, UserManager<User> userManager)
+        public PackageController(IRepository<Package> packageRepo,
+                                IRepository<Feedback> feedbackRepo,
+                                UserManager<User> userManager)
         {
             _packageRepo = packageRepo;
+            _feedbackRepo = feedbackRepo;
             _userManager = userManager;
         }
 
@@ -62,10 +66,9 @@ namespace GrandeTravels.Controllers
         [HttpPost]
         public async Task<IActionResult> AddPackage(AddPackageViewModel vm)
         {
-            User loggedUser = await _userManager.FindByNameAsync(User.Identity.Name);
-
             if (ModelState.IsValid)
             {
+                User loggedUser = await _userManager.FindByNameAsync(User.Identity.Name);
                 Package newPackage = new Package()
                 {
                     Name = vm.Name,
@@ -74,8 +77,6 @@ namespace GrandeTravels.Controllers
                     Price = vm.Price,
                     UserId = loggedUser.Id,
                     TravelProviderName = User.Identity.Name
-                    
-
                 };
 
                 _packageRepo.Create(newPackage);
@@ -148,15 +149,18 @@ namespace GrandeTravels.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult PackageDetails(int id)
         {
             Package pack = _packageRepo.GetSingle(p => p.ID == id);
+            IEnumerable<Feedback> feedback = _feedbackRepo.Query(f => f.PackageID == id);
 
             if (pack != null)
             {
                 PackageDetailsViewModel vm = new PackageDetailsViewModel();
                 vm.Package = pack;
+                vm.PackageFeedback = feedback;
 
                 return View(vm);
             }

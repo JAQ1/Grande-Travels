@@ -8,9 +8,10 @@ using GrandeTravels.Services;
 namespace GrandeTravels.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170822043001_uptTblFeedback")]
+    partial class uptTblFeedback
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -22,8 +23,6 @@ namespace GrandeTravels.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<DateTime>("ArrivalDate");
-
-                    b.Property<DateTime>("Date");
 
                     b.Property<DateTime>("DepartureDate");
 
