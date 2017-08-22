@@ -48,6 +48,7 @@ namespace GrandeTravels.Controllers
             if (ModelState.IsValid)
             {
                 User user = await _userManager.FindByNameAsync(User.Identity.Name);
+                Package pack = _packageRepo.GetSingle(p => p.ID == id);
 
                 Booking newBooking = new Booking();
 
@@ -56,11 +57,25 @@ namespace GrandeTravels.Controllers
                 newBooking.People = vm.People;
                 newBooking.TotalCost = vm.TotalCost;
                 newBooking.PackageID = id;
+                newBooking.PackageName = pack.Name;
                 newBooking.UserID = user.Id;
 
                 _bookingRepo.Create(newBooking);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("MyBookings", "Booking");
             }
+            return View(vm);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> MyBookings()
+        {
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            IEnumerable<Booking> bookings = _bookingRepo.Query(p => p.UserID == user.Id);
+            
+            MyBookingsViewModel vm = new MyBookingsViewModel();
+            vm.MyBookings = bookings;
+
             return View(vm);
         }
     }

@@ -235,9 +235,14 @@ C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrat
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170821022755_uptBookingClassProps.Designer.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170821030054_bookingsToPackage.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170821030054_bookingsToPackage.Designer.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170821055518_fixRelationships.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170821055518_fixRelationships.Designer.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170822020011_addColTblBooking.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170822020011_addColTblBooking.Designer.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\MyDbContextModelSnapshot.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\Booking.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\CustomerProfile.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\Feedback.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\Package.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\User.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Services\BaseRepository.cs
@@ -245,7 +250,9 @@ C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Servic
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Services\MyDbContext.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\AddPackageViewModel.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\BookPackageViewModel.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\LeaveFeedbackViewModel.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\LoginViewModel.cs
+C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\MyBookingsViewModel.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\PackageDetailsViewModel.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\PackageIndexViewModel.cs
 C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\SignUpViewModel.cs

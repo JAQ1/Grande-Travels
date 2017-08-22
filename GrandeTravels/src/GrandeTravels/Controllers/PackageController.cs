@@ -148,6 +148,7 @@ namespace GrandeTravels.Controllers
             }
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public IActionResult PackageDetails(int id)
         {
