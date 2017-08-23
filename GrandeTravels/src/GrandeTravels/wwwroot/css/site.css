@@ -1,38 +1,116 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿* {
+    margin:0;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
+html, body {
+    height:100%;
+    font-family: sans-serif;
+}
+
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    height:100%;
+    margin:0;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
-input,
-select,
-textarea {
-    max-width: 280px;
+h1, h2, h3, h4, h5, h6, p {
+    margin-bottom:20px;
 }
 
-/* Carousel */
-.carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+.sect{
+    height:100%;
+    margin-left:-30px;
+    background-size:cover;
+    background-repeat:no-repeat;
+    background-attachment:fixed;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"]
-{
-    width: 100%;
+.subSect{
+    height:50%;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-  /* Hide captions */
-  .carousel-caption {
-    display: none
-  }
+.sectOne {
+    background-image: url('../images/grande-travels_Background.jpg');
 }
+
+.sectTwo {
+    background-image: url('../images/grande-travels_GrassRelax.jpg');
+}
+
+.sectThree {
+    background-image: url('../images/grande-travels_CityAlley.jpg');
+}
+
+.overlay {
+    position:fixed;
+    top:0;
+    left:0;
+    width:0%;
+    height:100%;
+    background: rgba(0,0,0,.9);
+    overflow-x:hidden;
+    z-index:5;
+    transition:all 0.5s;
+}
+
+.overlay__content {
+    position:relative;
+    top: 25%;
+    text-align:center;
+    width:100%;
+    margin-top: 30px;
+
+}
+
+.overlay a {
+    padding:10px;
+    color:#ccc;
+    font-size:40px;
+    text-decoration:none;
+    display:block;
+}
+
+
+.overlay a:hover{
+    color:#fff;
+}
+
+.overlay .closeBtn {
+    position:absolute;
+    top:20px;
+    right:50px;
+    font-size:50px;
+}
+
+.openBtn {
+    position:fixed;
+    z-index:10;
+    color:#ccc;
+    top:20px;
+    right:50px;
+}
+
+#index-title {
+    position:absolute;
+    color:#ccc;
+    margin:0;
+    left:40px;
+    top:20px;
+}
+
+
+nav {
+    background-color:transparent;
+    height:100px;
+}
+
+nav li {
+    color:white;
+
+}
+
+nav.shrink {
+    background-color: rgba(0, 0, 0, 5) ;
+    height:60px;
+    padding-top:0px;
+}
+
