@@ -1,17 +1,13 @@
 ﻿
 $(document).ready(function () {
 
-    //nav-overlay(open)
-    $('closeBtn').click(function () {
-        ('.overlay')
+    //nav animation
+    $('.navToggleBtn').click(function () {
+        $('.navToggleBtn').toggleClass('active');
+
     });
 
-    //welcome animation
-    $(window).scroll(function () {
-        if ($(document).scrollTop() > 200) {
-            $('index-fireplace').animate({ left: '250px' });
-        }
+    $('.navToggleBtn').click(function () {
+        $('.overlay').toggleClass('open')
     });
-});
-
-
+})

@@ -1,8 +1,10 @@
 ﻿// Write your Javascript code.
-function openNav() {
-    document.getElementById('nav').style.width = "100%"
-}
 
-function closeNav() {
-    document.getElementById('nav').style.width = "0%";
+
+function toggleNav() {
+    if (document.getElementById('nav').style.width === "100%") {
+        document.getElementById('nav').style.width = "0%";
+    } else {
+        document.getElementById('nav').style.width = "100%"
+    }
 }
