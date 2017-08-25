@@ -5,7 +5,9 @@
 <ul>
     @foreach (var item in Model.Packages)
     {   
-        <li><a asp-action="PackageDetails" asp-controller="Package" asp-route-id="@item.ID">@item.Name</a>  <i>$@item.Price</i>  
+        <li>
+            <img src="~/@item.PhotoLocation" alt="Alternate Text" class="package-img"/>
+            <a asp-action="PackageDetails" asp-controller="Package" asp-route-id="@item.ID">@item.Name</a>  <i>$@item.Price</i>  
             @if (User.IsInRole("TravelProvider"))
             {
                 <a asp-action="UpdatePackage" asp-controller="Package" asp-route-id="@item.ID">Update</a>
@@ -16,8 +18,6 @@
         </li>
     }
 </ul>
-
-<h5>Number of Packages: <strong>@Model.PackageCount</strong></h5>
 
 @if (User.IsInRole("TravelProvider"))
 {

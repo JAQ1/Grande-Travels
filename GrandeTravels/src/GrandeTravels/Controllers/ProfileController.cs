@@ -30,6 +30,12 @@ namespace GrandeTravels.Controllers
         }
 
         [HttpGet]
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
         public async Task<IActionResult> UpdateCustomerProfile()
         {
             UpdateCustomerProfileViewModel vm = new UpdateCustomerProfileViewModel();

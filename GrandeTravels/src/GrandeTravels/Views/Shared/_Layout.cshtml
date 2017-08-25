@@ -72,6 +72,36 @@
     <div class="navToggleBtn" onclick="toggleNav()">
         <div class="hamburger"></div>
     </div>
+    <div class="userBtn dropdown">
+        <a href="#" class="glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown"></a>
+        <ul class="dropdown-menu">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <li class="dropdown-header"><a href="#">Logged in as <strong>@User.Identity.Name</strong></a></li>
+                <li class=""><a href="#">Your Profile</a></li>
+                <li class="divider"></li>
+                <li class=""><a asp-action="Logout" asp-controller="Account">Logout</a></li>
+            }
+            else
+            {
+                <li class="dropdown-header"><a href="#">User Options</a></li>
+                <li><a asp-action="SignUp" asp-controller="Account">Sign Up</a></li>
+                <li><a asp-action="Login" asp-controller="Account">Login</a></li>
+            }
+        </ul>
+    </div>
+
+    @*<div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            Dropdown Example
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+        </ul>
+    </div>*@
 
     <div class="container-fluid body-content">
 

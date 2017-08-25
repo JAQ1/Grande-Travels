@@ -1,6 +1,8 @@
 ﻿
 $(document).ready(function () {
 
+    //initPopover
+
     //nav animation
     $('.navToggleBtn').click(function () {
         $('.navToggleBtn').toggleClass('active');

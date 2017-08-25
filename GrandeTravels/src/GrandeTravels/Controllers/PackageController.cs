@@ -10,6 +10,8 @@ using GrandeTravels.ViewModels;
 using GrandeTravels.Models;
 using GrandeTravels.Services;
 using Microsoft.AspNetCore.Http;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,14 +23,17 @@ namespace GrandeTravels.Controllers
         private IRepository<Package> _packageRepo;
         private IRepository<Feedback> _feedbackRepo;
         private UserManager<User> _userManager;
+        private IHostingEnvironment _hostingEnviro;
 
         public PackageController(IRepository<Package> packageRepo,
                                 IRepository<Feedback> feedbackRepo,
-                                UserManager<User> userManager)
+                                UserManager<User> userManager,
+                                IHostingEnvironment hostingEnviro)
         {
             _packageRepo = packageRepo;
             _feedbackRepo = feedbackRepo;
             _userManager = userManager;
+            _hostingEnviro = hostingEnviro;
         }
 
         // GET: /<controller>/
@@ -64,7 +69,7 @@ namespace GrandeTravels.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPackage(AddPackageViewModel vm)
+        public async Task<IActionResult> AddPackage(AddPackageViewModel vm, IFormFile PhotoLocation)
         {
             if (ModelState.IsValid)
             {
@@ -78,6 +83,23 @@ namespace GrandeTravels.Controllers
                     UserId = loggedUser.Id,
                     TravelProviderName = User.Identity.Name
                 };
+
+                if (PhotoLocation != null)
+                {
+                    string uploadPath = Path.Combine(_hostingEnviro.WebRootPath, "Media\\TravelPackage");
+                    //uploadPath = Path.Combine(uploadPath, User.Identity.Name);
+                    //Directory.CreateDirectory(Path.Combine(uploadPath, tp.PackageName));
+                    string filename = User.Identity.Name + "-" + newPackage.Name + "-1" + Path.GetExtension(PhotoLocation.FileName);
+                    uploadPath = Path.Combine(uploadPath, filename);
+
+
+                    using (FileStream fs = new FileStream(uploadPath, FileMode.Create))
+                    {
+                        PhotoLocation.CopyTo(fs);
+                    }
+                    string SaveFilename = Path.Combine("Media\\TravelPackage", filename);
+                    newPackage.PhotoLocation = SaveFilename;
+                }
 
                 _packageRepo.Create(newPackage);
 

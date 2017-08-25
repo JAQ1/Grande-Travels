@@ -4,6 +4,7 @@
 
 html, body {
     height: 100%;
+    width:100%;
     font-family: serif;
 }
 
@@ -88,6 +89,29 @@ h1, h2, h3, h4, h5, h6, p {
     top: 20px;
     right: 50px;
     font-size: 50px;
+}
+.userBtn {
+    position:fixed;
+    top:19px;
+    right:125px;
+    padding:5px;
+    cursor:pointer;
+    z-index:9;
+    font-size:41px;
+
+}
+
+.userBtn a {
+    color:white;
+}
+
+.user-options{
+    font-size:25px;
+    font-family:sans-serif;
+    position:absolute;
+    top:50px;
+    right:1px;
+    width:300%;
 }
 
 .navToggleBtn {
@@ -216,4 +240,8 @@ nav {
 .social-info p {
     font-size: 25px;
     text-align:center;
+}
+
+.package-img {
+    max-width:25%;
 }
