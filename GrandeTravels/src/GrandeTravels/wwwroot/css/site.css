@@ -255,6 +255,22 @@ nav {
     height:100%;
 }
 
+.package{
+    text-align:center;
+}
+
+.package a,
+.package button{
+    width:100%;
+    margin:2px;
+}
+
+
+
+.provider-package-options {
+    
+}
+
 .bookBtn{
     width:100%;
 }
