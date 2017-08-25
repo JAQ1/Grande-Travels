@@ -242,6 +242,19 @@ nav {
     text-align:center;
 }
 
+.package {
+    list-style-type:none;
+}
+
+.package h3{
+    text-align:center;
+}
+
 .package-img {
-    max-width:25%;
+    width:100%;
+    height:100%;
+}
+
+.bookBtn{
+    width:100%;
 }

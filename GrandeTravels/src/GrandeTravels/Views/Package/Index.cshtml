@@ -1,23 +1,50 @@
 ﻿@model PackageIndexViewModel
+@{
+int colCount = 0;
+}
 
 <h1>Travel Packages</h1>
 
-<ul>
-    @foreach (var item in Model.Packages)
-    {   
-        <li>
-            <img src="~/@item.PhotoLocation" alt="Alternate Text" class="package-img"/>
-            <a asp-action="PackageDetails" asp-controller="Package" asp-route-id="@item.ID">@item.Name</a>  <i>$@item.Price</i>  
-            @if (User.IsInRole("TravelProvider"))
+<div class="container">
+        @foreach (var item in Model.Packages)
+        {
+            @if (colCount == 3)
             {
-                <a asp-action="UpdatePackage" asp-controller="Package" asp-route-id="@item.ID">Update</a>
-                <form asp-action="DiscontinuePackage" asp-controller="Package" asp-route-id="@item.ID" method="post">
-                    <button type="submit">Delete</button>
-                </form>
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                        <div class="panel panel-default package">
+                            <div class="panel-heading">
+                                <h3>@item.Name</h3>
+                            </div>
+                            <div class="panel-body">
+                                <img src="~/@item.PhotoLocation" alt="Image Error" class="package-img" />
+                            </div>
+                            <div class="panel-footer">
+                                <div class="btn btn-info bookBtn">Book Now</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             }
-        </li>
-    }
-</ul>
+            else
+            {
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                    <div class="panel panel-default package">
+                        <div class="panel-heading">
+                            <h3>@item.Name</h3>
+                        </div>
+                        <div class="panel-body">
+                            <img src="~/@item.PhotoLocation" alt="Image Error" class="package-img" />
+                        </div>
+                        <div class="panel-footer">
+                            <div class="btn btn-info bookBtn">Book Now</div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+</div>
+
 
 @if (User.IsInRole("TravelProvider"))
 {
