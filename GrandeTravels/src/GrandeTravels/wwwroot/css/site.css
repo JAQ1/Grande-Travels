@@ -291,6 +291,8 @@ nav {
     margin-left: -5%;
     margin-right: -5%;
     background-position-y: center;
+    background-size: cover;
+
 }
 
 .form-title {
@@ -304,5 +306,8 @@ nav {
 
 .signUp-banner {
     background-image: url('../images/grande-travels_SignUp.jpg');
-    background-size: cover;
+}
+
+.login-banner {
+    background-image: url('../images/grande-travels_Login.jpg');
 }

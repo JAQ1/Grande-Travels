@@ -1,6 +1,8 @@
 ﻿@model LoginViewModel
 
-<h1>Login</h1>
+<div class="login-banner form-banner"></div>
+
+<h1 class="form-title">Login</h1>
 
 <form asp-action="Login" asp-controller="Account" method="post" class="user-form">
     <div class="text-danger" asp-validation-summary="ModelOnly"></div>
@@ -18,5 +20,9 @@
     </div>
 
     <label class="checkbox-inline"><input type="checkbox" value="">Remember Me</label>
-    <button type="submit" class="btn btn-danger">Submit</button>
+
+    <br />  
+    <br />  
+
+    <button type="submit" class="btn btn-danger btn-submit">Submit</button>
 </form>
