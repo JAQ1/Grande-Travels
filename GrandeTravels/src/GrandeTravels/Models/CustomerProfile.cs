@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace GrandeTravels.Models
 {
-    public class CustomerProfile
+    public class CustomerProfile : Profile
     {
         public int CustomerProfileID { get; set; }
-        public string UserID { get; set; }
-        public string DisplayName { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string Phone { get; set; }
-        public string DisplayPhotoPath { get; set; }
     }
 }

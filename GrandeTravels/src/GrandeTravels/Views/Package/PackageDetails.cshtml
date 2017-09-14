@@ -1,8 +1,12 @@
 ﻿@model PackageDetailsViewModel
 
-<h1>@Model.Package.Name</h1>
+<div class="page-banner details-banner"></div>
+
+<h1 class="page-title">@Model.Package.Name </h1> 
 
 <h3>$@Model.Package.Price</h3>
+
+<img src="~/@Model.Package.PhotoLocation" alt="Alternate Text" />
 
 <p>@Model.Package.Description</p>
 

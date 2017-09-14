@@ -74,11 +74,12 @@
     </div>
     <div class="userBtn dropdown">
         <a href="#" class="glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown"></a>
-        <ul class="dropdown-menu">
+        
+        <ul class="dropdown-menu user-options" style="margin-right:100px;">
             @if (User.Identity.IsAuthenticated)
             {
-                <li class="dropdown-header"><a href="#">Logged in as <strong>@User.Identity.Name</strong></a></li>
-                <li class=""><a href="#">Your Profile</a></li>
+                //<li class="dropdown-header"><a href="#">Logged in as <strong>@User.Identity.Name</strong></a></li>
+                <li class=""><a asp-controller="Profile" asp-action="Index">Your Profile</a></li>
                 <li class="divider"></li>
                 <li class=""><a asp-action="Logout" asp-controller="Account">Logout</a></li>
             }
@@ -106,10 +107,6 @@
     <div class="container-fluid body-content">
 
         @RenderBody()
-        <hr />
-        @*<footer>
-            <p>&copy; 2017 - GrandeTravels</p>
-        </footer>*@
     </div>
 
     <environment names="Development">

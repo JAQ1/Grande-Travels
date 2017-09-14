@@ -14,7 +14,6 @@ html, body {
 }
 
 h1, h2, h3, h4, h5, h6, p {
-    margin-bottom: 20px;
 }
 
 .sect {
@@ -22,21 +21,11 @@ h1, h2, h3, h4, h5, h6, p {
     margin-left: -30px;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     background-position: bottom;
-}
-
-.subSect {
-    height: 50%;
-    padding-bottom: 400px;
 }
 
 .sectOne {
     background-image: url('../images/grande-travels_Background.jpg');
-}
-
-.sectTwo {
-    background-image: url('../images/grande-travels_BookShelf.jpg');
 }
 
 .overlay {
@@ -105,13 +94,18 @@ h1, h2, h3, h4, h5, h6, p {
         color: white;
     }
 
-.user-options {
-    font-size: 25px;
-    font-family: sans-serif;
-    position: absolute;
-    top: 50px;
-    right: 1px;
+.user-options{
+    font-size: 20px;
     width: 300%;
+    right:100px;
+}
+
+.user-options {
+    font-family: Comfortaa, sans-serif;
+}
+
+dropdown-header {
+    font-size: 25px;
 }
 
 .navToggleBtn {
@@ -220,28 +214,6 @@ nav {
         font-size: 225%;
     }
 
-.social-media {
-    border-bottom: 5px groove;
-}
-
-.social-img {
-    width: 175px;
-    margin-left: 100px;
-    margin-bottom: 25px;
-}
-
-.social-media h1 {
-    font-size: 40px;
-    text-align: center;
-    padding-top: 25px;
-    font-family: 'Cinzel', serif;
-}
-
-.social-info p {
-    font-size: 25px;
-    text-align: center;
-}
-
 .package {
     list-style-type: none;
 }
@@ -257,6 +229,8 @@ nav {
 
 .package {
     text-align: center;
+    font-family: 'Comfortaa', cursive;
+
 }
 
     .package a,
@@ -286,16 +260,17 @@ nav {
 
 }
 
-.form-banner {
+.page-banner {
     height: 40%;
     margin-left: -5%;
     margin-right: -5%;
-    background-position-y: center;
     background-size: cover;
+    background-repeat:no-repeat;
+    background-position-y: center;
 
 }
 
-.form-title {
+.page-title {
     font-family: 'Cinzel', serif;
     
 }
@@ -306,8 +281,22 @@ nav {
 
 .signUp-banner {
     background-image: url('../images/grande-travels_SignUp.jpg');
+
 }
 
 .login-banner {
     background-image: url('../images/grande-travels_Login.jpg');
+}
+
+.package-index-banner {
+    background-image: url('../images/grande-travels_bookshelf.jpg');
+}
+
+.details-banner {
+    background-image: url('../images/grande-travels_packagedetails.jpg');
+    background-position:bottom
+}
+
+.profile-banner {
+    background-image: url('../images/grande-trave_spaceearth.jpg');
 }
