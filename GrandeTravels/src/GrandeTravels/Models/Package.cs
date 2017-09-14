@@ -13,7 +13,7 @@ namespace GrandeTravels.Models
         public string Description { get; set; }
         public string Location { get; set; }
         public double Price { get; set; }
-        //public IFormFile PackageImage { get; set; }
+        public string PhotoLocation { get; set; }
         public string TravelProviderName { get; set; }
         public string ActiveStatus { get; set; }
 

@@ -7,11 +7,13 @@ using GrandeTravels.Services;
 using GrandeTravels.Models;
 using GrandeTravels.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GrandeTravels.Controllers
 {
+    [Authorize]
     public class BookingController : Controller
     {
         private UserManager<User> _userManager;

@@ -25,6 +25,6 @@ namespace GrandeTravels.ViewModels
         [Required]
         [DataType(DataType.Currency)]
         public double Price { get; set; }
-        public IFormFile PackageImage { get; set; }
+        public string PhotoLocation { get; set; }
     }
 }

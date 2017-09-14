@@ -7,18 +7,21 @@
 
     <environment names="Development">
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-        <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/site.css " />
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Cinzel|Comfortaa|Julius+Sans+One" rel="stylesheet">
     </environment>
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+        <link href="https://fonts.googleapis.com/css?family=Cinzel|Comfortaa|Julius+Sans+One" rel="stylesheet">
     </environment>
     @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    @*<nav class="navbar navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -55,16 +58,59 @@
                 </ul>
             </div>
         </div>
+    </nav>*@
+    <div id="nav" class="overlay">
+
+        <div class="overlay__content">
+            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+            <a asp-area="" asp-controller="Package" asp-action="Index">Packages</a>
+            <a asp-area="" asp-controller="Home" asp-action="About">About</a>
+            <a href="#">Contact</a>
+        </div>
     </div>
-    <div class="container body-content">
+
+    <div class="navToggleBtn" onclick="toggleNav()">
+        <div class="hamburger"></div>
+    </div>
+    <div class="userBtn dropdown">
+        <a href="#" class="glyphicon glyphicon-user dropdown-toggle" data-toggle="dropdown"></a>
+        
+        <ul class="dropdown-menu user-options" style="margin-right:100px;">
+            @if (User.Identity.IsAuthenticated)
+            {
+                //<li class="dropdown-header"><a href="#">Logged in as <strong>@User.Identity.Name</strong></a></li>
+                <li class=""><a asp-controller="Profile" asp-action="Index">Your Profile</a></li>
+                <li class="divider"></li>
+                <li class=""><a asp-action="Logout" asp-controller="Account">Logout</a></li>
+            }
+            else
+            {
+                <li class="dropdown-header"><a href="#">User Options</a></li>
+                <li><a asp-action="SignUp" asp-controller="Account">Sign Up</a></li>
+                <li><a asp-action="Login" asp-controller="Account">Login</a></li>
+            }
+        </ul>
+    </div>
+
+    @*<div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
+            Dropdown Example
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li><a href="#">JavaScript</a></li>
+        </ul>
+    </div>*@
+
+    <div class="container-fluid body-content">
+
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2017 - GrandeTravels</p>
-        </footer>
     </div>
 
     <environment names="Development">
+        <script src="~/js/jquery.js"></script>
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>

@@ -109,6 +109,8 @@ namespace GrandeTravels.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<string>("PhotoLocation");
+
                     b.Property<double>("Price");
 
                     b.Property<string>("TravelProviderName");
