@@ -10,10 +10,10 @@ namespace GrandeTravels.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "TblCustProfile",
+                name: "TblProfile",
                 columns: table => new
                 {
-                    CustomerProfileID = table.Column<int>(nullable: false)
+                    ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     DisplayName = table.Column<string>(nullable: true),
                     DisplayPhotoPath = table.Column<string>(nullable: true),
@@ -25,7 +25,7 @@ namespace GrandeTravels.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TblCustProfile", x => x.CustomerProfileID);
+                    table.PrimaryKey("PK_TblProfile", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,10 +87,11 @@ namespace GrandeTravels.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Description = table.Column<string>(maxLength: 225, nullable: false),
-                    Location = table.Column<string>(nullable: false),
-                    Name = table.Column<string>(maxLength: 50, nullable: false),
-                    PackageImage = table.Column<byte[]>(nullable: false),
+                    ActiveStatus = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Location = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    PhotoLocation = table.Column<string>(nullable: true),
                     Price = table.Column<double>(nullable: false),
                     TravelProviderName = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
@@ -192,6 +193,88 @@ namespace GrandeTravels.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "TblBooking",
+                columns: table => new
+                {
+                    BookingID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ArrivalDate = table.Column<DateTime>(nullable: false),
+                    Date = table.Column<DateTime>(nullable: false),
+                    DepartureDate = table.Column<DateTime>(nullable: false),
+                    PackageID = table.Column<int>(nullable: false),
+                    PackageName = table.Column<string>(nullable: true),
+                    People = table.Column<int>(nullable: false),
+                    TotalCost = table.Column<double>(nullable: false),
+                    UserID = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblBooking", x => x.BookingID);
+                    table.ForeignKey(
+                        name: "FK_TblBooking_TblPackage_PackageID",
+                        column: x => x.PackageID,
+                        principalTable: "TblPackage",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TblBooking_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Feedback",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Comment = table.Column<string>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    PackageID = table.Column<int>(nullable: false),
+                    Rating = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
+                    UserName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Feedback", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Feedback_TblPackage_PackageID",
+                        column: x => x.PackageID,
+                        principalTable: "TblPackage",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Feedback_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TblBooking_PackageID",
+                table: "TblBooking",
+                column: "PackageID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TblBooking_UserID",
+                table: "TblBooking",
+                column: "UserID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedback_PackageID",
+                table: "Feedback",
+                column: "PackageID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Feedback_UserId",
+                table: "Feedback",
+                column: "UserId");
+
             migrationBuilder.CreateIndex(
                 name: "IX_TblPackage_UserId",
                 table: "TblPackage",
@@ -237,10 +320,13 @@ namespace GrandeTravels.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TblCustProfile");
+                name: "TblBooking");
 
             migrationBuilder.DropTable(
-                name: "TblPackage");
+                name: "Feedback");
+
+            migrationBuilder.DropTable(
+                name: "TblProfile");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
@@ -256,6 +342,9 @@ namespace GrandeTravels.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "TblPackage");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

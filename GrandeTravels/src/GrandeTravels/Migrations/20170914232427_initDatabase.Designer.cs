@@ -8,8 +8,8 @@ using GrandeTravels.Services;
 namespace GrandeTravels.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20170818041533_addActiveStatusToPackage")]
-    partial class addActiveStatusToPackage
+    [Migration("20170914232427_initDatabase")]
+    partial class initDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,9 +17,93 @@ namespace GrandeTravels.Migrations
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("GrandeTravels.Models.CustomerProfile", b =>
+            modelBuilder.Entity("GrandeTravels.Models.Booking", b =>
                 {
-                    b.Property<int>("CustomerProfileID")
+                    b.Property<int>("BookingID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("ArrivalDate");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<DateTime>("DepartureDate");
+
+                    b.Property<int>("PackageID");
+
+                    b.Property<string>("PackageName");
+
+                    b.Property<int>("People");
+
+                    b.Property<double>("TotalCost");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("BookingID");
+
+                    b.HasIndex("PackageID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("TblBooking");
+                });
+
+            modelBuilder.Entity("GrandeTravels.Models.Feedback", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Comment");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("PackageID");
+
+                    b.Property<int>("Rating");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("PackageID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Feedback");
+                });
+
+            modelBuilder.Entity("GrandeTravels.Models.Package", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ActiveStatus");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Location");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("PhotoLocation");
+
+                    b.Property<double>("Price");
+
+                    b.Property<string>("TravelProviderName");
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TblPackage");
+                });
+
+            modelBuilder.Entity("GrandeTravels.Models.Profile", b =>
+                {
+                    b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("DisplayName");
@@ -36,35 +120,9 @@ namespace GrandeTravels.Migrations
 
                     b.Property<string>("UserID");
 
-                    b.HasKey("CustomerProfileID");
-
-                    b.ToTable("TblCustProfile");
-                });
-
-            modelBuilder.Entity("GrandeTravels.Models.Package", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("ActiveStatus");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Location");
-
-                    b.Property<string>("Name");
-
-                    b.Property<double>("Price");
-
-                    b.Property<string>("TravelProviderName");
-
-                    b.Property<string>("UserId");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TblPackage");
+                    b.ToTable("TblProfile");
                 });
 
             modelBuilder.Entity("GrandeTravels.Models.User", b =>
@@ -223,9 +281,33 @@ namespace GrandeTravels.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("GrandeTravels.Models.Booking", b =>
+                {
+                    b.HasOne("GrandeTravels.Models.Package", "Package")
+                        .WithMany("Bookings")
+                        .HasForeignKey("PackageID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GrandeTravels.Models.User", "User")
+                        .WithMany("Bookings")
+                        .HasForeignKey("UserID");
+                });
+
+            modelBuilder.Entity("GrandeTravels.Models.Feedback", b =>
+                {
+                    b.HasOne("GrandeTravels.Models.Package", "Package")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("PackageID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("GrandeTravels.Models.User", "User")
+                        .WithMany("Feedbacks")
+                        .HasForeignKey("UserId");
+                });
+
             modelBuilder.Entity("GrandeTravels.Models.Package", b =>
                 {
-                    b.HasOne("GrandeTravels.Models.User")
+                    b.HasOne("GrandeTravels.Models.User", "User")
                         .WithMany("Packages")
                         .HasForeignKey("UserId");
                 });

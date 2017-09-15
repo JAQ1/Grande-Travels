@@ -46,30 +46,6 @@ namespace GrandeTravels.Migrations
                     b.ToTable("TblBooking");
                 });
 
-            modelBuilder.Entity("GrandeTravels.Models.CustomerProfile", b =>
-                {
-                    b.Property<int>("CustomerProfileID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("DisplayName");
-
-                    b.Property<string>("DisplayPhotoPath");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<string>("UserID");
-
-                    b.HasKey("CustomerProfileID");
-
-                    b.ToTable("TblCustProfile");
-                });
-
             modelBuilder.Entity("GrandeTravels.Models.Feedback", b =>
                 {
                     b.Property<int>("ID")
@@ -122,6 +98,30 @@ namespace GrandeTravels.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("TblPackage");
+                });
+
+            modelBuilder.Entity("GrandeTravels.Models.Profile", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DisplayName");
+
+                    b.Property<string>("DisplayPhotoPath");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("TblProfile");
                 });
 
             modelBuilder.Entity("GrandeTravels.Models.User", b =>
