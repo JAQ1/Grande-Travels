@@ -44,20 +44,18 @@ namespace GrandeTravels.Controllers
 
                     if (profile == null)
                     {
-                        if (User.IsInRole("Customer"))
+                        profile = new Profile()
                         {
-                            CustomerProfile custProf = new CustomerProfile()
-                            {
-                                DisplayPhotoPath = "images/user.png",
-                                DisplayName = "No Display Name",
-                                FirstName = "No Firstname",
-                                LastName = "No Lastname",
-                                Email = user.Email,
-                                Phone = "No Phone"
-                            };
+                            DisplayPhotoPath = "images/user.png",
+                            DisplayName = "No Display Name",
+                            FirstName = "No Firstname",
+                            LastName = "No Lastname",
+                            Email = user.Email,
+                            Phone = "No Phone",
+                            UserID = user.Id
+                        };
 
-                            profile = custProf;
-                        }
+                        _profileRepo.Create(profile);
                     }
 
                     vm.DisplayPhotoPath = profile.DisplayPhotoPath;
@@ -66,6 +64,7 @@ namespace GrandeTravels.Controllers
                     vm.LastName = profile.LastName;
                     vm.Email = profile.Email;
                     vm.Phone = profile.Phone;
+
                 }
                 else
                 {
@@ -80,6 +79,25 @@ namespace GrandeTravels.Controllers
 
             return View(vm);
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateProfile()
+        {
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            Profile profile = _profileRepo.GetSingle(p => p.UserID == user.Id);
+
+            UpdateProfileViewModel vm = new UpdateProfileViewModel();
+
+            vm.DisplayName = profile.DisplayName;
+            vm.FirstName = profile.FirstName;
+            vm.LastName = profile.LastName;
+            vm.Email = profile.Email;
+            vm.Phone = profile.Phone;
+            vm.DisplayPhotoPath = profile.DisplayPhotoPath;
+            
+
+            return View(vm);
         }
 
         //[HttpGet]

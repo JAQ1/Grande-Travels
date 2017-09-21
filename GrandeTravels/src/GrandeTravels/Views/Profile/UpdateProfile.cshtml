@@ -1,0 +1,50 @@
+﻿@model UpdateProfileViewModel
+
+<div class="page-banner profile-banner"></div>
+<h1 class="page-title">Update Profile</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <img src="~/@Model.DisplayPhotoPath" alt="Cant display image1" class="img-thumbnail img-responsive user-img" />
+            <hr />
+            <a id="change-user-img">Change Display Photo</a>
+        </div>
+        <div class="col-lg-9">
+            <ul class="nav nav-tabs profile-options">
+                <li><a asp-controller="Profile" asp-action="Index">Overview</a></li>
+                <li><a href="#">My Bookings</a></li>
+                <li class="active"><a href="#">Update Profile</a></li>
+            </ul>
+            <br />
+            <div class="profile-options">
+                <form>
+                    <div class="form-group">
+                        <h2><strong>Display Name:</strong></h2>
+                        <input class="form-control" type="text" value="@Model.DisplayName" />
+                    </div>
+
+                    <div class="form-group">
+                        <h2><strong>Firstname:</strong></h2>
+                        <input class="form-control" type="text" value="@Model.FirstName" />
+                    </div>
+
+                    <div class="form-group">
+                        <h2><strong>Lastname:</strong></h2>
+                        <input class="form-control" type="text" value="@Model.LastName" />
+                    </div>
+
+                    <div class="form-group">
+                        <h2><strong>Email:</strong></h2>
+                        <input class="form-control" type="text" value="@Model.Email" />
+                    </div>
+
+                    <div class="form-group">
+                        <h2><strong>Phone:</strong></h2>
+                        <input class="form-control" type="text" value="@Model.Phone" />
+                    </div>
+                </form>
+            </div>
+            <br />
+        </div>
+    </div>
+</div>

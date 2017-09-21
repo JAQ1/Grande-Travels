@@ -222,7 +222,6 @@
 "C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\20170914232427_initDatabase.Designer.cs"
 "C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Migrations\MyDbContextModelSnapshot.cs"
 "C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\Booking.cs"
-"C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\CustomerProfile.cs"
 "C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\Feedback.cs"
 "C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\Package.cs"
 "C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\Models\Profile.cs"
@@ -241,3 +240,4 @@
 "C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\SignUpViewModel.cs"
 "C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\UpdateCustomerProfileViewModel.cs"
 "C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\UpdatePackageViewModel.cs"
+"C:\Users\Jack\Source\Repos\Grande-Travels\GrandeTravels\src\GrandeTravels\ViewModels\UpdateProfileViewModel.cs"
