@@ -1,26 +1,75 @@
 ﻿@model PackageDetailsViewModel
 
 <div class="page-banner details-banner"></div>
+<h1 class="page-title">Details</h1>
 
-<h1 class="page-title">@Model.Package.Name </h1> 
 
-<h3>$@Model.Package.Price</h3>
+<div class="container">
+    <div class="row">
+        <h2>@Model.Package.Name </h2>
 
-<img src="~/@Model.Package.PhotoLocation" alt="Alternate Text" />
+        <div class="col-lg-8">
+            <h3>$@Model.Package.Price</h3>
 
-<p>@Model.Package.Description</p>
+            <img src="~/@Model.Package.PhotoLocation" class="img-responsive" alt="Alternate Text" />
+            <br />
+            
+            <p><strong>Description: </strong> @Model.Package.Description</p>
 
-<h5>Comments:</h5>
+            <a asp-action="BookPackage" asp-controller="Booking" asp-route-id="@Model.Package.ID" class="btn btn-success">Book Now</a>
 
-<ul>
-    @foreach (var item in Model.PackageFeedback)
-    {
-        <li>
-            <strong>@item.UserName</strong> - @item.Rating Stars
-            <i>@item.Comment</i>
-            - @item.Date
-        </li>
-    }
-</ul>
+            <hr />
 
-<a asp-action="BookPackage" asp-controller="Booking" asp-route-id="@Model.Package.ID">Book Now</a>
+            <div class="container">
+                <h5>Comments:</h5>
+
+                <ul>
+                    @foreach (var item in Model.PackageFeedback)
+                    {
+                        <li>
+                            <strong>@item.UserName</strong> - @item.Rating Stars
+                            <i>@item.Comment</i>
+                            - @item.Date
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <h3>Other Packages</h3>
+
+            @foreach (var item in Model.OtherPackages)
+            {
+                <div class="panel panel-default package">
+                    <div class="panel-heading">
+                        <h3>@item.Name</h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="~/@item.PhotoLocation" alt="Image Error" class="package-img" />
+                    </div>
+                    <div class="panel-footer">
+                        <h5>$@item.Price</h5>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <a asp-action="PackageDetails" asp-controller="Package" asp-route-id="@item.ID" class="btn btn-info">Details</a>
+                            </div>
+                        </div>
+                        @if (User.IsInRole("TravelProvider"))
+                        {
+                            <div class="row provider-package-options">
+                                <div class="col-lg-6">
+                                    <a asp-action="UpdatePackage" asp-controller="Package" asp-route-id="@item.ID" class="glyphicon glyphicon-pencil btn btn-warning"></a>
+                                </div>
+                                <div class="col-lg-6">
+                                    <form asp-action="DiscontinuePackage" asp-controller="Package" asp-route-id="@item.ID" method="post"><button type="submit" class="glyphicon glyphicon-trash btn btn-danger"></button></form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div> 
+
+

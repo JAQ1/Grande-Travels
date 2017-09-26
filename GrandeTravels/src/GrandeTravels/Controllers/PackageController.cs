@@ -175,14 +175,17 @@ namespace GrandeTravels.Controllers
         [HttpGet]
         public IActionResult PackageDetails(int id)
         {
+
             Package pack = _packageRepo.GetSingle(p => p.ID == id);
             IEnumerable<Feedback> feedback = _feedbackRepo.Query(f => f.PackageID == id);
+            IEnumerable<Package> otherPackages = _packageRepo.Query(p => p.ID != id && p.ActiveStatus != "Inactive");
 
             if (pack != null)
             {
                 PackageDetailsViewModel vm = new PackageDetailsViewModel();
                 vm.Package = pack;
                 vm.PackageFeedback = feedback;
+                vm.OtherPackages = otherPackages;
 
                 return View(vm);
             }

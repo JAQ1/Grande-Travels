@@ -5,7 +5,7 @@
 html, body {
     height: 100%;
     width: 100%;
-    font-family: serif;
+    font-family: 'Comfortaa', cursive;
 }
 
 .body-content {
@@ -290,7 +290,7 @@ nav {
 
 .page-title {
     font-family: 'Cinzel', serif;
-    
+    padding: 25px;
 }
 
 .btn-submit {
@@ -320,3 +320,4 @@ nav {
     /*background-position: left;
     width:106%;*/
 }
+
