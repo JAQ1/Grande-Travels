@@ -7,7 +7,6 @@
         <div class="col-lg-3">
             <img src="~/@Model.DisplayPhotoPath" alt="Cant display image1" class="img-thumbnail img-responsive user-img" />
             <hr />
-            <a id="change-user-img">Change Display Photo</a>
         </div>
         <div class="col-lg-9">
             <ul class="nav nav-tabs profile-options">
@@ -17,31 +16,47 @@
             </ul>
             <br />
             <div class="profile-options">
-                <form>
+                <form asp-action="UpdateProfile" asp-controller="Profile" method="post" enctype="multipart/form-data">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
                     <div class="form-group">
                         <h2><strong>Display Name:</strong></h2>
-                        <input class="form-control" type="text" value="@Model.DisplayName" />
+                        <input class="form-control" type="text" asp-for="DisplayName" value="@Model.DisplayName" />
+                        <span asp-validation-for="DisplayName" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <h2><strong>Firstname:</strong></h2>
-                        <input class="form-control" type="text" value="@Model.FirstName" />
+                        <input class="form-control" type="text" asp-for="FirstName" value="@Model.FirstName" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+
                     </div>
 
                     <div class="form-group">
                         <h2><strong>Lastname:</strong></h2>
-                        <input class="form-control" type="text" value="@Model.LastName" />
+                        <input class="form-control" type="text" asp-for="LastName" value="@Model.LastName" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <h2><strong>Email:</strong></h2>
-                        <input class="form-control" type="text" value="@Model.Email" />
+                        <input class="form-control" type="text" asp-for="Email" value="@Model.Email" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <h2><strong>Phone:</strong></h2>
-                        <input class="form-control" type="text" value="@Model.Phone" />
+                        <input class="form-control" type="text" asp-for="Phone" value="@Model.Phone" />
+                        <span asp-validation-for="Phone" class="text-danger"></span>
                     </div>
+
+                    <div class="form-group">
+                        <h2><strong>Display Photo:</strong></h2>
+                        <input class="form-control" type="file" name="DisplayPhotoPath" />
+                        <span asp-validation-for="DisplayPhotoPath" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-info">Update</button>
                 </form>
             </div>
             <br />

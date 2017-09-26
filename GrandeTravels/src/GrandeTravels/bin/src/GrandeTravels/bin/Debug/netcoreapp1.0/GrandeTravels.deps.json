@@ -4140,7 +4140,7 @@
     "Microsoft.EntityFrameworkCore/1.1.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-2oY1cQ3DEhpbRjlDBE1zb7IngKyPC4fslAX5WL1mnVQOLX/8BPOAjgYM2inzNK2z8ld/DxBUZEwc3xfNc8qhbw=="
+      "sha512": "sha512-SPBs8SQlpXHUTv7NwQQSCtyXuMFXgqiuHYA1Xdhx82OVunNqm29PlUqRHgvajHq+LVApxDaTDhAJwEABGIkeqw=="
     },
     "Microsoft.EntityFrameworkCore.Design/1.0.0-preview2-final": {
       "type": "package",
@@ -4155,7 +4155,7 @@
     "Microsoft.EntityFrameworkCore.Relational/1.1.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-oiPXaIMk8cPbEmtcChzhPzM1ZyEYMoy8sMYWgWfv292Q0e0U2v7CIrtGylrORVZOA4lb9M0gWjbfKPtj7iDbxA=="
+      "sha512": "sha512-4dQP93TsIH7KbMxvsEqeq/37kZZ/JpxHpRfd/2lSmw4eP7+JbwdDls2t7NwuC3qxmqAonexuVjfZf1C4cyHhJg=="
     },
     "Microsoft.EntityFrameworkCore.Relational.Design/1.0.0": {
       "type": "package",
@@ -4615,7 +4615,7 @@
     "System.Diagnostics.DiagnosticSource/4.3.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-j72A3mwamUXPgDIU1TWyzea7yqz59+iO2cmXuyzvcfuszWGq9JRbWify1k33lLQophaXOIyhPkEevfP0k4M3wg=="
+      "sha512": "sha512-11w6mvfalKO/TLvl6SnbVDMk6C/NJobMG9CgeR3rtrSIIe1yn8+mm6a4JZbCjDFRSaRnVBKTK/e8y+K+3SD18g=="
     },
     "System.Diagnostics.Tools/4.3.0": {
       "type": "package",

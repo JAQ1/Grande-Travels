@@ -11,6 +11,7 @@ using GrandeTravels.Services;
 using GrandeTravels.ViewModels;
 using Microsoft.AspNetCore.Http;
 using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,12 +22,19 @@ namespace GrandeTravels.Controllers
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
         private IRepository<Profile> _profileRepo;
+        private IHostingEnvironment _hostingEnviro;
 
-        public ProfileController(UserManager<User> userManager, SignInManager<User> signInManager, IRepository<Profile> profileRepo)
+
+        public ProfileController(
+            UserManager<User> userManager, 
+            SignInManager<User> signInManager, 
+            IRepository<Profile> profileRepo, 
+            IHostingEnvironment hostingEnviro)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _profileRepo = profileRepo;
+            _hostingEnviro = hostingEnviro;
         }
 
         [HttpGet]
@@ -100,6 +108,48 @@ namespace GrandeTravels.Controllers
             return View(vm);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateProfile(UpdateProfileViewModel vm, IFormFile DisplayPhotoPath)
+        {
+            if (ModelState.IsValid)
+            {
+                User user = await _userManager.FindByNameAsync(User.Identity.Name);
+                Profile profile = _profileRepo.GetSingle(p => p.UserID == user.Id);
+
+                profile.DisplayName = vm.DisplayName;
+                profile.FirstName = vm.FirstName;
+                profile.LastName = vm.LastName;
+                profile.Email = vm.Email;
+                profile.Phone = vm.Phone;
+
+                if (DisplayPhotoPath != null)
+                {
+                    string uploadPath = Path.Combine(_hostingEnviro.WebRootPath, "Media\\Profile");
+                    string filename = User.Identity.Name + "-" + profile.ID + Path.GetExtension(DisplayPhotoPath.FileName);
+
+                    uploadPath = Path.Combine(uploadPath, filename);
+
+
+                    using (FileStream fs = new FileStream(uploadPath, FileMode.Create))
+                    {
+                        DisplayPhotoPath.CopyTo(fs);
+                    }
+
+                    string SaveFilename = Path.Combine("Media\\Profile", filename);
+                    profile.DisplayPhotoPath = SaveFilename;
+                }
+                else
+                {
+                    profile.DisplayPhotoPath = "images/user.png";
+                }
+
+                _profileRepo.Update(profile);
+
+                return RedirectToAction("Index");
+            }
+
+            return View(vm);
+        }
         //[HttpGet]
         //public async Task<IActionResult> UpdateCustomerProfile()
         //{
