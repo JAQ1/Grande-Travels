@@ -13,27 +13,53 @@
 
             <img src="~/@Model.Package.PhotoLocation" class="img-responsive" alt="Alternate Text" />
             <br />
-            
+
             <p><strong>Description: </strong> @Model.Package.Description</p>
 
             <a asp-action="BookPackage" asp-controller="Booking" asp-route-id="@Model.Package.ID" class="btn btn-success">Book Now</a>
 
             <hr />
+            <form asp-action="PackageDetails" asp-controller="Package" asp-route-id="@Model.Package.ID" method="post">
+                <div class="form-group">
+                    <label>leave feedback</label>
+                    <input class="form-control" asp-for="@Model.Comment" type="text" rows="3" />
 
-            <div class="container">
-                <h5>Comments:</h5>
 
-                <ul>
-                    @foreach (var item in Model.PackageFeedback)
-                    {
-                        <li>
-                            <strong>@item.UserName</strong> - @item.Rating Stars
-                            <i>@item.Comment</i>
-                            - @item.Date
-                        </li>
-                    }
-                </ul>
-            </div>
+                    <button class="btn btn-info">Post</button>
+                </div>
+            </form>
+            <h5>@Model.CommentCount Comments</h5>
+
+            @foreach (var item in Model.PackageFeedback)
+            {
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-2 col-sm-2">
+                                <img src="~/@item.Profile.DisplayPhotoPath" alt="error" class="img-responsive img-thumbnail" />
+                            </div>
+                            <div class="col-lg-10">
+                                <p ><strong>@item.Profile.DisplayName</strong></p>
+                                <p>@item.Comment</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-body">
+                        <div class="row thumb-group" >
+                            <div class="col-lg-6">
+                                <div class="btn btn-success thumb">
+                                    <span class="glyphicon glyphicon-thumbs-up"></span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="btn btn-danger thumb">
+                                    <span class="glyphicon glyphicon-thumbs-down"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
         <div class="col-lg-4">
             <h3>Other Packages</h3>
@@ -70,6 +96,6 @@
             }
         </div>
     </div>
-</div> 
+</div>
 
 

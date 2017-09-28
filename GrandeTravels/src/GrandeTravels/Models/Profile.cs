@@ -15,5 +15,7 @@ namespace GrandeTravels.Models
         public string Email { get; set; }
         public string Phone { get; set; }
         public string DisplayPhotoPath { get; set; }
+
+        public IEnumerable<Feedback> Feedbacks { get; set; }
     }
 }

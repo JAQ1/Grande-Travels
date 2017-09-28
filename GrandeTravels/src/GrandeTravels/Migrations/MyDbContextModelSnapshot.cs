@@ -57,19 +57,17 @@ namespace GrandeTravels.Migrations
 
                     b.Property<int>("PackageID");
 
+                    b.Property<int>("ProfileID");
+
                     b.Property<int>("Rating");
-
-                    b.Property<string>("UserId");
-
-                    b.Property<string>("UserName");
 
                     b.HasKey("ID");
 
                     b.HasIndex("PackageID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ProfileID");
 
-                    b.ToTable("Feedback");
+                    b.ToTable("TblFeedback");
                 });
 
             modelBuilder.Entity("GrandeTravels.Models.Package", b =>
@@ -299,9 +297,10 @@ namespace GrandeTravels.Migrations
                         .HasForeignKey("PackageID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("GrandeTravels.Models.User", "User")
+                    b.HasOne("GrandeTravels.Models.Profile", "Profile")
                         .WithMany("Feedbacks")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ProfileID")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("GrandeTravels.Models.Package", b =>

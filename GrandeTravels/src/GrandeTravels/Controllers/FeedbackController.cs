@@ -15,21 +15,25 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace GrandeTravels.Controllers
 {
-    [Authorize(Roles = "Customer")]
+    [Authorize]
     public class FeedbackController : Controller
     {
         private UserManager<User> _userManager;
         private IRepository<Package> _packageRepo;
         private IRepository<Feedback> _feedbackRepo;
+        private IRepository<Profile> _profileRepo;
+
 
 
         public FeedbackController(UserManager<User> userManager, 
                                 IRepository<Package> packageRepo, 
-                                IRepository<Feedback> feedbackRepo)
+                                IRepository<Feedback> feedbackRepo,
+                                IRepository<Profile> profileRepo)
         {
             _userManager = userManager;
             _packageRepo = packageRepo;
             _feedbackRepo = feedbackRepo;
+            _profileRepo = profileRepo;
         }
 
         // GET: /<controller>/
@@ -51,30 +55,37 @@ namespace GrandeTravels.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> LeaveFeedback(LeaveFeedbackViewModel vm, int id)
+        public async Task<ActionResult> LeaveFeedback(PackageDetailsViewModel vm, int id)
         {
-            Package package = _packageRepo.GetSingle(p => p.ID == id);
-
-            if (ModelState.IsValid)
+            if (User.Identity.IsAuthenticated)
             {
-                User user = await _userManager.FindByNameAsync(User.Identity.Name);
-                Feedback feedback = new Feedback()
+                if (ModelState.IsValid)
                 {
-                    Comment = vm.Comment,
-                    Rating = vm.Rating,
-                    PackageID = package.ID,
-                    UserId = user.Id,
-                    UserName = user.UserName,
-                    Date = DateTime.Today
-                };
+                    User user = await _userManager.FindByNameAsync(User.Identity.Name);
+                    Profile profile = _profileRepo.GetSingle(p => p.UserID == user.Id);
+                    Package package = _packageRepo.GetSingle(p => p.ID == id);
 
-                _feedbackRepo.Create(feedback);
+                    Feedback feedback = new Feedback();
 
-                return RedirectToAction("MyBookings", "Booking");
+                    feedback.Comment = vm.Comment;
+                    feedback.PackageID = package.ID;
+                    feedback.ProfileID = profile.ID;
+                    feedback.Profile = profile;
+                    feedback.Date = DateTime.Today;
+
+
+                    _feedbackRepo.Create(feedback);
+
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+
             }
 
-            vm.Package = package;
-            return View(vm);
+            return RedirectToAction("PackageDetails", "Package");
 
         }
     }

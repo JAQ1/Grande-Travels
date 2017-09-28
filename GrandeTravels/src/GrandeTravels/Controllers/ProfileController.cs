@@ -50,6 +50,7 @@ namespace GrandeTravels.Controllers
                 {
                     Profile profile = _profileRepo.GetSingle(p => p.UserID == user.Id);
 
+                    //shouldnt be null
                     if (profile == null)
                     {
                         profile = new Profile()

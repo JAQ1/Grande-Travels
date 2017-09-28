@@ -17,22 +17,26 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace GrandeTravels.Controllers
 {
-    [Authorize(Roles = "TravelProvider")]
+
     public class PackageController : Controller
     {
         private IRepository<Package> _packageRepo;
         private IRepository<Feedback> _feedbackRepo;
+        private IRepository<Profile> _profileRepo;
         private UserManager<User> _userManager;
         private IHostingEnvironment _hostingEnviro;
 
-        public PackageController(IRepository<Package> packageRepo,
+        public PackageController(
+            IRepository<Package> packageRepo,
                                 IRepository<Feedback> feedbackRepo,
                                 UserManager<User> userManager,
+                                IRepository<Profile> profileRepo,
                                 IHostingEnvironment hostingEnviro)
         {
             _packageRepo = packageRepo;
             _feedbackRepo = feedbackRepo;
             _userManager = userManager;
+            _profileRepo = profileRepo;
             _hostingEnviro = hostingEnviro;
         }
 
@@ -142,7 +146,7 @@ namespace GrandeTravels.Controllers
                 pack.Description = vm.Description;
                 pack.Location = vm.Location;
                 pack.Price = vm.Price;
-                
+
                 _packageRepo.Update(pack);
 
                 return RedirectToAction("Index", "Package");
@@ -173,24 +177,74 @@ namespace GrandeTravels.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public IActionResult PackageDetails(int id)
+        public async Task<IActionResult> PackageDetails(int id)
         {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
 
             Package pack = _packageRepo.GetSingle(p => p.ID == id);
-            IEnumerable<Feedback> feedback = _feedbackRepo.Query(f => f.PackageID == id);
+            IEnumerable<Feedback> feedbacks = _feedbackRepo.Query(f => f.PackageID == id);
             IEnumerable<Package> otherPackages = _packageRepo.Query(p => p.ID != id && p.ActiveStatus != "Inactive");
 
             if (pack != null)
             {
                 PackageDetailsViewModel vm = new PackageDetailsViewModel();
                 vm.Package = pack;
-                vm.PackageFeedback = feedback;
+                vm.PackageFeedback = feedbacks;
+                vm.CommentCount = feedbacks.Count();
                 vm.OtherPackages = otherPackages;
 
+                for (int i = 0; i < feedbacks.Count(); i++)
+                {
+                    
+
+                    Feedback feedback = feedbacks.ElementAt(i);
+                    feedback.Profile = new Profile();
+
+                    Profile profile = _profileRepo.GetSingle(p => p.ID == feedback.ProfileID);
+
+                    feedback.Profile.DisplayPhotoPath = profile.DisplayPhotoPath;
+                    feedback.Profile.DisplayName = profile.DisplayName;
+                }
+               
                 return View(vm);
             }
 
             return RedirectToAction("Index");
+        }
+
+        //POST commnent
+        [HttpPost]
+        public async Task<ActionResult> PackageDetails(PackageDetailsViewModel vm, int id)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                if (ModelState.IsValid)
+                {
+                    User user = await _userManager.FindByNameAsync(User.Identity.Name);
+                    Profile profile = _profileRepo.GetSingle(p => p.UserID == user.Id);
+                    Package package = _packageRepo.GetSingle(p => p.ID == id);
+
+                    Feedback feedback = new Feedback();
+
+                    feedback.Comment = vm.Comment;
+                    feedback.PackageID = package.ID;
+                    feedback.ProfileID = profile.ID;
+                    feedback.Date = DateTime.Today;
+
+
+                    _feedbackRepo.Create(feedback);
+
+                    vm.Package = package;
+                }
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "Account");
+
+            }
+
+            return RedirectToAction("PackageDetails");
         }
     }
 }

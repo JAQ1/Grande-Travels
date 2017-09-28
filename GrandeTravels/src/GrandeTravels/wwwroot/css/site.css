@@ -73,6 +73,11 @@ html, body {
         color: #fff;
     }
 
+.thumb{
+    width:300px;
+    padding-bottom:-5px;
+}
+
 .overlay .closeBtn {
     position: absolute;
     top: 20px;
