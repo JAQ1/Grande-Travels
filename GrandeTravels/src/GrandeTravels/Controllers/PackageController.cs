@@ -85,6 +85,9 @@ namespace GrandeTravels.Controllers
                 case "Price(High - Low)":
                     vm.Packages = vm.Packages.OrderByDescending(p => p.Price);
                     break;
+                case "Price(Low - High)":
+                    vm.Packages = vm.Packages.OrderBy(p => p.Price );
+                    break;
                 default:
                     break;
             }
