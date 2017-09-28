@@ -10,6 +10,8 @@ namespace GrandeTravels.ViewModels
     {
         public string SearchQuery { get; set; }
         public string SortBy { get; set; }
+        public double MaxPrice { get; set; }
+        public double MinPrice { get; set; }
         public int PackageCount { get; set; }
         public IEnumerable<Package> Packages { get; set; }
     }

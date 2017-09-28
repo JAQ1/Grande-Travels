@@ -60,8 +60,9 @@ namespace GrandeTravels.Controllers
                 }
 
                 vm.Packages = activePackages;
+                vm.MaxPrice = activePackages.OrderByDescending(p => p.Price).ElementAt(0).Price;
+                vm.MinPrice = activePackages.OrderBy(p => p.Price).ElementAt(0).Price;
             }
-
             return View(vm);
         }
 
@@ -69,26 +70,34 @@ namespace GrandeTravels.Controllers
         public ActionResult Index(PackageIndexViewModel vm)
         {
             string query = vm.SearchQuery;
+            double maxPrice = vm.MaxPrice;
+            double minPrice = vm.MinPrice;
+
+            if (maxPrice == 0)
+            {
+                maxPrice = vm.Packages.OrderByDescending(p => p.Price).ElementAt(0).Price;
+            }
 
             if (query != null)
             {
                 IEnumerable<Package> searchResult = _packageRepo.Query(i => i.Name.Contains(query) || i.Location.Contains(query));
-
-                
-
+                vm.Packages = searchResult;
             }
             else
             {
                 vm.Packages = _packageRepo.GetAll();
             }
-            
+
             List<Package> activePackages = new List<Package>();
 
             foreach (var item in vm.Packages)
             {
                 if (item.ActiveStatus != "Inactive")
                 {
-                    activePackages.Add(item);
+                    if (item.Price > minPrice && item.Price < maxPrice)
+                    {
+                        activePackages.Add(item);
+                    }
                 }
             }
 
@@ -106,7 +115,7 @@ namespace GrandeTravels.Controllers
                     vm.Packages = vm.Packages.OrderByDescending(p => p.Price);
                     break;
                 case "Price(Low - High)":
-                    vm.Packages = vm.Packages.OrderBy(p => p.Price );
+                    vm.Packages = vm.Packages.OrderBy(p => p.Price);
                     break;
                 default:
                     break;
@@ -245,7 +254,7 @@ namespace GrandeTravels.Controllers
 
                 for (int i = 0; i < feedbacks.Count(); i++)
                 {
-                    
+
 
                     Feedback feedback = feedbacks.ElementAt(i);
                     feedback.Profile = new Profile();
@@ -255,7 +264,7 @@ namespace GrandeTravels.Controllers
                     feedback.Profile.DisplayPhotoPath = profile.DisplayPhotoPath;
                     feedback.Profile.DisplayName = profile.DisplayName;
                 }
-               
+
                 return View(vm);
             }
 
