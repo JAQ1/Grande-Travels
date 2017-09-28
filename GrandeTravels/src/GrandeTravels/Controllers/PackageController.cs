@@ -73,15 +73,35 @@ namespace GrandeTravels.Controllers
             if (query != null)
             {
                 IEnumerable<Package> searchResult = _packageRepo.Query(i => i.Name.Contains(query) || i.Location.Contains(query));
-                vm.Packages = searchResult;
+
+                
+
             }
             else
             {
                 vm.Packages = _packageRepo.GetAll();
             }
+            
+            List<Package> activePackages = new List<Package>();
+
+            foreach (var item in vm.Packages)
+            {
+                if (item.ActiveStatus != "Inactive")
+                {
+                    activePackages.Add(item);
+                }
+            }
+
+            vm.Packages = activePackages;
 
             switch (vm.SortBy)
             {
+                case "Name(A - Z)":
+                    vm.Packages = vm.Packages.OrderBy(p => p.Name);
+                    break;
+                case "Location(A - Z)":
+                    vm.Packages = vm.Packages.OrderBy(p => p.Location);
+                    break;
                 case "Price(High - Low)":
                     vm.Packages = vm.Packages.OrderByDescending(p => p.Price);
                     break;
