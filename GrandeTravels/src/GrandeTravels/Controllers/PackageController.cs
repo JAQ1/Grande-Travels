@@ -65,6 +65,24 @@ namespace GrandeTravels.Controllers
             return View(vm);
         }
 
+        [HttpPost]
+        public ActionResult Index(PackageIndexViewModel vm)
+        {
+            string query = vm.SearchQuery;
+
+            if (query != null)
+            {
+                IEnumerable<Package> searchResult = _packageRepo.Query(i => i.Name.Contains(query) || i.Location.Contains(query));
+                vm.Packages = searchResult;
+            }
+            else
+            {
+                vm.Packages = _packageRepo.GetAll();
+            }
+
+            return View(vm);
+        }
+
         [HttpGet]
         public IActionResult AddPackage()
         {

@@ -8,6 +8,7 @@ namespace GrandeTravels.ViewModels
 {
     public class PackageIndexViewModel
     {
+        public string SearchQuery { get; set; }
         public int PackageCount { get; set; }
         public IEnumerable<Package> Packages { get; set; }
     }

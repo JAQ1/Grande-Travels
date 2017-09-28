@@ -8,6 +8,30 @@
 <h1 class="page-title">Travel Packages</h1>
 
 <div class="container">
+    <div class="container">
+        <form asp-action="Index" asp-controller="Package" method="post">
+            <div class="row">
+                <div class="col-lg-11">
+                    <div class="input-group">
+                        <input type="text" asp-for="SearchQuery" class="form-control" placeholder="Search" />
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-info">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+                <div class="col-lg-2">
+
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr />
+
     @foreach (var item in Model.Packages)
     {
         @if (colCount == 3)
@@ -25,7 +49,7 @@
                             <h5>$@item.Price</h5>
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <a asp-action="PackageDetails" asp-controller="Package" asp-route-id="@item.ID"  class="btn btn-info">Details</a>
+                                    <a asp-action="PackageDetails" asp-controller="Package" asp-route-id="@item.ID" class="btn btn-info">Details</a>
                                 </div>
                             </div>
                             @if (User.IsInRole("TravelProvider"))
@@ -47,7 +71,7 @@
         else
         {
             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <div asp-action="PackageDetails" asp-controller="Package" asp-route-id="@item.ID"  class="panel panel-default package">
+                <div asp-action="PackageDetails" asp-controller="Package" asp-route-id="@item.ID" class="panel panel-default package">
                     <div class="panel-heading">
                         <h2>@item.Name</h2>
                     </div>
