@@ -80,6 +80,15 @@ namespace GrandeTravels.Controllers
                 vm.Packages = _packageRepo.GetAll();
             }
 
+            switch (vm.SortBy)
+            {
+                case "Price(High - Low)":
+                    vm.Packages = vm.Packages.OrderByDescending(p => p.Price);
+                    break;
+                default:
+                    break;
+            }
+
             return View(vm);
         }
 

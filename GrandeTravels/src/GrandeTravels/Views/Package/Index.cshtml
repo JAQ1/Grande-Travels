@@ -11,7 +11,7 @@
     <div class="container">
         <form asp-action="Index" asp-controller="Package" method="post">
             <div class="row">
-                <div class="col-lg-11">
+                <div class="col-lg-8">
                     <div class="input-group">
                         <input type="text" asp-for="SearchQuery" class="form-control" placeholder="Search" />
                         <div class="input-group-btn">
@@ -22,7 +22,17 @@
                     </div>
                 </div>
                 <div class="col-lg-2">
-
+                    <div class="form-group">
+                        <label>Sort By</label>
+                        <select class="form-control" asp-for="@Model.SortBy" id="sel1">
+                            <option>Name(A-Z)</option>
+                            <option>Location(A-Z)</option>
+                            <option>Price(High - Low)</option>
+                            <option>Price(Low - High)</option>
+                            <option></option>
+                        </select>
+                        <div class=""
+                    </div>
                 </div>
                 <div class="col-lg-2">
 
@@ -30,6 +40,7 @@
             </div>
         </form>
     </div>
+
     <hr />
 
     @foreach (var item in Model.Packages)
