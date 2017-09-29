@@ -8,7 +8,7 @@ using GrandeTravels.Services;
 namespace GrandeTravels.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20170927062408_initDatabase")]
+    [Migration("20170929091650_initDatabase")]
     partial class initDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,15 +62,11 @@ namespace GrandeTravels.Migrations
 
                     b.Property<int>("Rating");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("ID");
 
                     b.HasIndex("PackageID");
 
                     b.HasIndex("ProfileID");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("TblFeedback");
                 });
@@ -303,13 +299,9 @@ namespace GrandeTravels.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("GrandeTravels.Models.Profile", "Profile")
-                        .WithMany()
+                        .WithMany("Feedbacks")
                         .HasForeignKey("ProfileID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("GrandeTravels.Models.User")
-                        .WithMany("Feedbacks")
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("GrandeTravels.Models.Package", b =>

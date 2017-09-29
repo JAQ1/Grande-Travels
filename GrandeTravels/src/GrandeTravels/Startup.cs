@@ -12,11 +12,13 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 using GrandeTravels.Services;
 using GrandeTravels.Models;
+using System.Reflection;
 
 namespace GrandeTravels
 {
     public class Startup
     {
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
@@ -24,9 +26,11 @@ namespace GrandeTravels
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
-
+                
             if (env.IsDevelopment())
             {
+                builder.AddUserSecrets();
+
                 // This will push telemetry data through Application Insights pipeline faster, allowing you to view results immediately.
                 builder.AddApplicationInsightsSettings(developerMode: true);
             }
@@ -48,6 +52,8 @@ namespace GrandeTravels
 
 
 
+
+
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
 
@@ -65,6 +71,7 @@ namespace GrandeTravels
                 }
 
                 ).AddEntityFrameworkStores<MyDbContext>().AddDefaultTokenProviders();
+
             services.AddDbContext<MyDbContext>();
 
         }
@@ -92,6 +99,12 @@ namespace GrandeTravels
             app.UseStaticFiles();
 
             app.UseIdentity();
+
+            app.UseFacebookAuthentication(new FacebookOptions()
+            {
+                AppId = Configuration["Authentication:Facebook:AppId"],
+                AppSecret = Configuration["Authentication:Facebook:AppSecret"]
+            });
 
             app.UseMvc(routes =>
             {

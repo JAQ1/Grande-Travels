@@ -1,8 +1,36 @@
-﻿@model LoginViewModel
+﻿@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Authentication
+@model LoginViewModel
+@inject SignInManager<User> SignInManager
 
 <div class="page-banner login-banner"></div>
 
 <h1 class="page-title">Login</h1>
+
+@{ 
+    var loginProviders = SignInManager.GetExternalAuthenticationSchemes().ToList();
+    if (loginProviders.Count == 0)
+    {
+        <div>
+            <p>
+                There are no external authentication services configured...
+            </p>
+        </div>
+    }
+    else
+    {
+        <form asp-controller="Account" asp-action="ExternalLogin" method="post">
+            <div>
+                <p>
+                    @foreach (var provider in loginProviders)
+                    {
+                        <button type="submit" class="btn btn-default" name="provider" value="@provider.AuthenticationScheme" title="Log in using @provider.DisplayName account">@provider.AuthenticationScheme</button>
+                    }
+                </p>
+            </div>
+        </form>
+    }
+}
 
 <form asp-action="Login" asp-controller="Account" method="post" class="user-form">
     <div class="text-danger" asp-validation-summary="ModelOnly"></div>
@@ -20,6 +48,8 @@
     </div>
 
     <label class="checkbox-inline"><input type="checkbox" value="">Remember Me</label>
+
+    
 
     <br />  
     <br />  

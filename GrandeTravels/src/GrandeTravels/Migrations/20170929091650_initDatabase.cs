@@ -235,8 +235,7 @@ namespace GrandeTravels.Migrations
                     Date = table.Column<DateTime>(nullable: false),
                     PackageID = table.Column<int>(nullable: false),
                     ProfileID = table.Column<int>(nullable: false),
-                    Rating = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    Rating = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -253,12 +252,6 @@ namespace GrandeTravels.Migrations
                         principalTable: "TblProfile",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TblFeedback_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -280,11 +273,6 @@ namespace GrandeTravels.Migrations
                 name: "IX_TblFeedback_ProfileID",
                 table: "TblFeedback",
                 column: "ProfileID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TblFeedback_UserId",
-                table: "TblFeedback",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TblPackage_UserId",
