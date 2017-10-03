@@ -48,11 +48,9 @@ namespace GrandeTravels
             services.AddScoped<IRepository<Package>, BaseRepository<Package>>();
             services.AddScoped<IRepository<Booking>, BaseRepository<Booking>>();
             services.AddScoped<IRepository<Feedback>, BaseRepository<Feedback>>();
-
-
-
-
-
+            services.AddScoped<IRepository<ShoppingCart>, BaseRepository<ShoppingCart>>();
+            services.AddScoped<IRepository<ShoppingCartPackage>, BaseRepository<ShoppingCartPackage>>();
+            
 
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);

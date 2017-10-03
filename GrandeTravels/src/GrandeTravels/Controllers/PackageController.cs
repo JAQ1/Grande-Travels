@@ -60,8 +60,13 @@ namespace GrandeTravels.Controllers
                 }
 
                 vm.Packages = activePackages;
-                vm.MaxPrice = activePackages.OrderByDescending(p => p.Price).ElementAt(0).Price;
-                vm.MinPrice = activePackages.OrderBy(p => p.Price).ElementAt(0).Price;
+
+                if (activePackages.Count != 0)
+                {
+                    vm.MaxPrice = activePackages.OrderByDescending(p => p.Price).ElementAt(0).Price;
+                    vm.MinPrice = activePackages.OrderBy(p => p.Price).ElementAt(0).Price;
+                }
+
             }
             return View(vm);
         }
@@ -72,11 +77,7 @@ namespace GrandeTravels.Controllers
             string query = vm.SearchQuery;
             double maxPrice = vm.MaxPrice;
             double minPrice = vm.MinPrice;
-
-            if (maxPrice == 0)
-            {
-                maxPrice = vm.Packages.OrderByDescending(p => p.Price).ElementAt(0).Price;
-            }
+            
 
             if (query != null)
             {
@@ -94,7 +95,7 @@ namespace GrandeTravels.Controllers
             {
                 if (item.ActiveStatus != "Inactive")
                 {
-                    if (item.Price > minPrice && item.Price < maxPrice)
+                    if (item.Price >= minPrice && item.Price <= maxPrice)
                     {
                         activePackages.Add(item);
                     }

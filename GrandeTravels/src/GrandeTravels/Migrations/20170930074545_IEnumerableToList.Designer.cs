@@ -8,8 +8,8 @@ using GrandeTravels.Services;
 namespace GrandeTravels.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20170929091650_initDatabase")]
-    partial class initDatabase
+    [Migration("20170930074545_IEnumerableToList")]
+    partial class IEnumerableToList
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -88,11 +88,15 @@ namespace GrandeTravels.Migrations
 
                     b.Property<double>("Price");
 
+                    b.Property<int?>("ShoppingCartID");
+
                     b.Property<string>("TravelProviderName");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ShoppingCartID");
 
                     b.HasIndex("UserId");
 
@@ -121,6 +125,25 @@ namespace GrandeTravels.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("TblProfile");
+                });
+
+            modelBuilder.Entity("GrandeTravels.Models.ShoppingCart", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("PackageCount");
+
+                    b.Property<double>("TotalPrice");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("UserID")
+                        .IsUnique();
+
+                    b.ToTable("TblShoppingCart");
                 });
 
             modelBuilder.Entity("GrandeTravels.Models.User", b =>
@@ -306,9 +329,20 @@ namespace GrandeTravels.Migrations
 
             modelBuilder.Entity("GrandeTravels.Models.Package", b =>
                 {
+                    b.HasOne("GrandeTravels.Models.ShoppingCart", "ShoppingCart")
+                        .WithMany("Packages")
+                        .HasForeignKey("ShoppingCartID");
+
                     b.HasOne("GrandeTravels.Models.User", "User")
                         .WithMany("Packages")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("GrandeTravels.Models.ShoppingCart", b =>
+                {
+                    b.HasOne("GrandeTravels.Models.User", "User")
+                        .WithOne("ShoppingCart")
+                        .HasForeignKey("GrandeTravels.Models.ShoppingCart", "UserID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

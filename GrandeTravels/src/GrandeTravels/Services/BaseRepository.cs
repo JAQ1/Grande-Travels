@@ -33,7 +33,7 @@ namespace GrandeTravels.Services
 
         public T GetSingle(Expression<Func<T, bool>> predicate)
         {
-            return _context.Set<T>().FirstOrDefault(predicate);
+           return _context.Set<T>().FirstOrDefault(predicate);
         }
 
         public IEnumerable<T> Query(Expression<Func<T, bool>> predicate)

@@ -10,5 +10,6 @@ namespace GrandeTravels.Models
     {
         public IEnumerable<Package> Packages { get; set; }
         public IEnumerable<Booking> Bookings { get; set; }
+        public ShoppingCart ShoppingCart { get; set; }
     }
 }

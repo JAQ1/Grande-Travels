@@ -123,10 +123,15 @@
             </div>
         }
     }
+    @if (User.IsInRole("TravelProvider"))
+    {
+        <div class="container">
+            <a asp-action="AddPackage" asp-controller="Package" class="btn btn-success" style="width:100%; margin-bottom:20px;">
+                <span class="glyphicon glyphicon-plus"></span>
+            </a>
+        </div>
+    }
 </div>
 
 
-@if (User.IsInRole("TravelProvider"))
-{
-    <a asp-action="AddPackage" asp-controller="Package" class="glyphicon glyphicon-plus"></a>
-}
+

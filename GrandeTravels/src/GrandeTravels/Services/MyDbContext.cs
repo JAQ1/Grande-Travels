@@ -15,6 +15,9 @@ namespace GrandeTravels.Services
         public DbSet<Profile> TblProfile { get; set; }
         public DbSet<Booking> TblBooking { get; set; }
         public DbSet<Feedback> TblFeedback { get; set; }
+        public DbSet<ShoppingCart> TblShoppingCart { get; set; }
+        public DbSet<ShoppingCartPackage> TblShoppingCartPackage { get; set; }
+
 
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

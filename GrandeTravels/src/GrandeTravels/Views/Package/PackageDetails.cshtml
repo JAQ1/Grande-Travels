@@ -16,9 +16,12 @@
 
             <p><strong>Description: </strong> @Model.Package.Description</p>
 
-            <a asp-action="BookPackage" asp-controller="Booking" asp-route-id="@Model.Package.ID" class="btn btn-success">Book Now</a>
+            <form asp-action="AddToCart" asp-controller="ShoppingCart" asp-route-id="@Model.Package.ID" method="post">
+                <button type="submit" class="btn btn-success">Add to cart</button>
+            </form>
 
             <hr />
+
             <form asp-action="PackageDetails" asp-controller="Package" asp-route-id="@Model.Package.ID" method="post">
                 <div class="form-group">
                     <label>leave feedback</label>

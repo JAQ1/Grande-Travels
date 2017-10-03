@@ -8,9 +8,10 @@ using GrandeTravels.Services;
 namespace GrandeTravels.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    partial class MyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170930033155_initDatabase")]
+    partial class initDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
@@ -87,11 +88,15 @@ namespace GrandeTravels.Migrations
 
                     b.Property<double>("Price");
 
+                    b.Property<int>("ShoppingCartID");
+
                     b.Property<string>("TravelProviderName");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("ID");
+
+                    b.HasIndex("ShoppingCartID");
 
                     b.HasIndex("UserId");
 
@@ -127,8 +132,6 @@ namespace GrandeTravels.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("CheckedOut");
-
                     b.Property<int>("PackageCount");
 
                     b.Property<double>("TotalPrice");
@@ -141,24 +144,6 @@ namespace GrandeTravels.Migrations
                         .IsUnique();
 
                     b.ToTable("TblShoppingCart");
-                });
-
-            modelBuilder.Entity("GrandeTravels.Models.ShoppingCartPackage", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("PackageID");
-
-                    b.Property<int>("ShoppingCartID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("PackageID");
-
-                    b.HasIndex("ShoppingCartID");
-
-                    b.ToTable("TblShoppingCartPackage");
                 });
 
             modelBuilder.Entity("GrandeTravels.Models.User", b =>
@@ -344,6 +329,11 @@ namespace GrandeTravels.Migrations
 
             modelBuilder.Entity("GrandeTravels.Models.Package", b =>
                 {
+                    b.HasOne("GrandeTravels.Models.ShoppingCart")
+                        .WithMany("Packages")
+                        .HasForeignKey("ShoppingCartID")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("GrandeTravels.Models.User", "User")
                         .WithMany("Packages")
                         .HasForeignKey("UserId");
@@ -351,22 +341,9 @@ namespace GrandeTravels.Migrations
 
             modelBuilder.Entity("GrandeTravels.Models.ShoppingCart", b =>
                 {
-                    b.HasOne("GrandeTravels.Models.User", "User")
+                    b.HasOne("GrandeTravels.Models.User")
                         .WithOne("ShoppingCart")
                         .HasForeignKey("GrandeTravels.Models.ShoppingCart", "UserID");
-                });
-
-            modelBuilder.Entity("GrandeTravels.Models.ShoppingCartPackage", b =>
-                {
-                    b.HasOne("GrandeTravels.Models.Package", "Package")
-                        .WithMany("ShoppingCartPackages")
-                        .HasForeignKey("PackageID")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("GrandeTravels.Models.ShoppingCart", "ShoppingCart")
-                        .WithMany("ShoppingCartPackages")
-                        .HasForeignKey("ShoppingCartID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>

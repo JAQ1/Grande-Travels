@@ -1,0 +1,14 @@
+﻿@model ShoppingCartViewModel
+
+<h1 class="page-title">Shopping Cart</h1>
+
+<div class="list-group">
+    @foreach (var package in Model.Packages)
+    {
+        <div class="list-group-item">
+            @package.Name
+        </div>
+    }
+
+    <a asp-controller="Package" asp-action="Index" class="btn btn-info">Continue browsing</a>
+</div>

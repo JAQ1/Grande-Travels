@@ -21,5 +21,6 @@ namespace GrandeTravels.Models
         public User User { get; set; }
         public IEnumerable<Feedback> Feedbacks { get; set; }
         public IEnumerable<Booking> Bookings { get; set; }
+        public IEnumerable<ShoppingCartPackage> ShoppingCartPackages { get; set; }
     }
 }
