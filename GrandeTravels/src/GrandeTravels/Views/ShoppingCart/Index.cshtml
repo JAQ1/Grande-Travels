@@ -2,13 +2,46 @@
 
 <h1 class="page-title">Shopping Cart</h1>
 
-<div class="list-group">
+<div class="container">
     @foreach (var package in Model.Packages)
     {
-        <div class="list-group-item">
-            @package.Name
-        </div>
-    }
+        <div class="media">
+            <div class="media-left media-top">
+                <img src="~/@package.PhotoLocation" alt="Package Photo" style="width:50px;" />
+            </div>
+            <div class="media-body">
+                @package.Name
+                <div style="float:right; text-align:center;">
+                    $@package.Price
+                </div>
+            </div>
+            <div class="media-right">
+                <form asp-controller="ShoppingCart" asp-action="DeleteCartPackage" asp-route-id="@package.ID" method="post">
+                    <button type="submit" class="btn btn-danger btnDeleteCartPack" style="float:right;">
+                        <span class="glyphicon glyphicon-trash"></span>
+                    </button>
+                </form>
 
-    <a asp-controller="Package" asp-action="Index" class="btn btn-info">Continue browsing</a>
+            </div>
+        </div>
+        <hr />
+    }
+    <div class="media">
+
+        <div class="media-body">
+            <div id="btnEditCart" class="btn btn-warning" style="width:100%;">
+                <span class="glyphicon glyphicon-pencil"></span>
+            </div>
+        </div>
+        <div class="media-right">
+            <strong>Total: $@Model.TotalPrice</strong>
+        </div>
+    </div>
 </div>
+
+<a asp-controller="Package" asp-action="Index" class="btn btn-info">Continue browsing</a>
+<form asp-controller="ShoppingCart" asp-action="Index" method="post">
+    <button type="submit" class="btn btn-warning">
+        Order Now
+    </button>
+</form>

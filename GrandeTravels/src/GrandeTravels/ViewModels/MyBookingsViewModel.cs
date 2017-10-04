@@ -8,6 +8,7 @@ namespace GrandeTravels.ViewModels
 {
     public class MyBookingsViewModel
     {
-        public IEnumerable<Booking> MyBookings { get; set; }
+        public IEnumerable<Booking> Bookings { get; set; }
+        public string DisplayPhotoPath { get; set; }
     }
 }

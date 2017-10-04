@@ -77,7 +77,7 @@ namespace GrandeTravels.Controllers
             IEnumerable<Booking> bookings = _bookingRepo.Query(p => p.UserID == user.Id);
             
             MyBookingsViewModel vm = new MyBookingsViewModel();
-            vm.MyBookings = bookings;
+            vm.Bookings = bookings;
 
             return View(vm);
         }

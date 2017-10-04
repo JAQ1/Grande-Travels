@@ -22,19 +22,22 @@ namespace GrandeTravels.Controllers
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
         private IRepository<Profile> _profileRepo;
+        private IRepository<Booking> _bookingRepo;
         private IHostingEnvironment _hostingEnviro;
 
 
         public ProfileController(
             UserManager<User> userManager, 
             SignInManager<User> signInManager, 
-            IRepository<Profile> profileRepo, 
+            IRepository<Profile> profileRepo,
+            IRepository<Booking> bookingRepo,
             IHostingEnvironment hostingEnviro)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _profileRepo = profileRepo;
             _hostingEnviro = hostingEnviro;
+            _bookingRepo = bookingRepo;
         }
 
         [HttpGet]
@@ -151,70 +154,17 @@ namespace GrandeTravels.Controllers
 
             return View(vm);
         }
-        //[HttpGet]
-        //public async Task<IActionResult> UpdateCustomerProfile()
-        //{
-        //    UpdateCustomerProfileViewModel vm = new UpdateCustomerProfileViewModel();
-        //    vm.SavedStatus = null;
 
-        //}
+        [HttpGet]
+        public async Task<IActionResult> MyBookings()
+        {
+            User user = await _userManager.GetUserAsync(HttpContext.User);
 
-        //[HttpPost]
-        //public async Task<ActionResult> UpdateCustomerProfile(UpdateCustomerProfileViewModel vm, IFormFile photoLocation)
-        //{
-        //    vm.SavedStatus = null;
+            MyBookingsViewModel vm = new MyBookingsViewModel();
 
-        //    if (ModelState.IsValid)
-        //    {
-        //        User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            vm.Bookings = _bookingRepo.Query(b => b.UserID == user.Id);
 
-        //        CustomerProfile tempProfile = new CustomerProfile();
-        //        tempProfile.DisplayName = vm.DisplayName;
-        //        tempProfile.FirstName = vm.FirstName;
-        //        tempProfile.LastName = vm.LastName;
-        //        tempProfile.Email = vm.Email;
-        //        tempProfile.Phone = vm.Phone;
-        //        tempProfile.UserID = user.Id;
-
-        //        CustomerProfile custProfile = _customerProfileRepo.GetSingle(p => p.UserID == user.Id);
-
-        //        try
-        //        {
-        //            if (custProfile != null)
-        //            {
-        //                //keep the existing profile ID
-        //                custProfile.DisplayName = tempProfile.DisplayName;
-        //                custProfile.FirstName = tempProfile.FirstName;
-        //                custProfile.LastName = tempProfile.LastName;
-        //                custProfile.Email = tempProfile.Email;
-        //                custProfile.Phone = tempProfile.Phone;
-
-        //                _customerProfileRepo.Update(custProfile);
-        //            }
-        //            else
-        //            {
-        //                _customerProfileRepo.Create(tempProfile);
-        //            }
-
-        //            if (vm.DisplayPhotoPath != null)
-        //            {
-        //                // full path to file in temp location
-        //                var filePath = Path.GetTempFileName();
-        //            }
-
-        //            vm.SavedStatus = "Your detials were successfully saved!";
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            Console.WriteLine(ex.Message);
-        //            vm.SavedStatus = "Something went wrong with saving your details :/";
-        //            throw;
-        //        }
-
-
-        //    }
-
-        //    return View(vm);
-        //}
+            return View(vm);
+        }
     }
 }

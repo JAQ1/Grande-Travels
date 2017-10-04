@@ -1,7 +1,7 @@
 ﻿
 $(document).ready(function () {
 
-    //initPopover
+    $('.btnDeleteCartPack').hide();
 
     //nav animation
     $('.navToggleBtn').click(function () {

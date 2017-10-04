@@ -18,18 +18,21 @@ namespace GrandeTravels.Controllers
         private readonly IRepository<Package> _packageRepo;
         private readonly IRepository<ShoppingCart> _shoppingCartRepo;
         private readonly IRepository<ShoppingCartPackage> _shoppingCartPackageRepo;
+        private readonly IRepository<Booking> _bookingRepo;
 
         public ShoppingCartController(
             UserManager<User> userManager, 
             IRepository<Package> packageRepo,
             IRepository<ShoppingCart> shoppingCartRepo,
-            IRepository<ShoppingCartPackage> shoppingCartPackageRepo
+            IRepository<ShoppingCartPackage> shoppingCartPackageRepo,
+            IRepository<Booking> bookingRepo
             )
         {
             _userManager = userManager;
             _packageRepo = packageRepo;
             _shoppingCartRepo = shoppingCartRepo;
             _shoppingCartPackageRepo = shoppingCartPackageRepo;
+            _bookingRepo = bookingRepo;
         }
         
         // GET: /<controller>/
@@ -45,19 +48,47 @@ namespace GrandeTravels.Controllers
                 _shoppingCartPackageRepo.Query(cartPack => cartPack.ShoppingCart.ID == cartID);
 
             List<Package> packages = new List<Package>();
+            double totalPrice = 0;
             foreach (var item in cartPackages)
             {
                 Package package = new Package();
                 package = _packageRepo.GetSingle(p => p.ID == item.PackageID);
 
+                totalPrice += package.Price;
                 packages.Add(package);
             }
 
             ShoppingCartViewModel vm = new ShoppingCartViewModel();
-            vm.TotalPrice = shoppingCart.TotalPrice;
+            vm.TotalPrice = totalPrice;
             vm.Packages = packages;
 
             return View(vm);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(ShoppingCartViewModel vm)
+        {
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            ShoppingCart shoppingCart = _shoppingCartRepo.GetSingle(cart => cart.UserID == user.Id);
+            int cartID = shoppingCart.ID;
+
+            //get all PackageID's that belong to user's ShoppingCart
+            IEnumerable<ShoppingCartPackage> cartPackages =
+                _shoppingCartPackageRepo.Query(cartPack => cartPack.ShoppingCart.ID == cartID);
+
+            List<Package> packages = new List<Package>();
+            foreach (var item in cartPackages)
+            {
+                Booking booking = new Booking();
+
+                booking.PackageID = item.PackageID;
+                booking.UserID = user.Id;
+
+                _bookingRepo.Create(booking);
+            }
+
+            return RedirectToAction("MyBookings", "Profile");
         }
 
         [HttpPost]
@@ -79,6 +110,19 @@ namespace GrandeTravels.Controllers
             cartPackage.ShoppingCartID = shoppingCart.ID;
 
             _shoppingCartPackageRepo.Create(cartPackage);
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteCartPackage(int id)
+        {
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+            ShoppingCart shoppingCart = _shoppingCartRepo.GetSingle(cart => cart.UserID == user.Id);
+
+            ShoppingCartPackage cartPackage = _shoppingCartPackageRepo.GetSingle(p => p.ShoppingCartID == shoppingCart.ID && p.PackageID == id);
+
+            _shoppingCartPackageRepo.Delete(cartPackage);
 
             return RedirectToAction("Index");
         }
