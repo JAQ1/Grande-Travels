@@ -37,11 +37,11 @@
             <strong>Total: $@Model.TotalPrice</strong>
         </div>
     </div>
+    <a asp-controller="Package" asp-action="Index" class="btn btn-info">Continue browsing</a>
+    <form asp-controller="ShoppingCart" asp-action="Index" method="post" style="float:right;">
+        <button type="submit" class="btn btn-success">
+            Order Now
+        </button>
+    </form>
 </div>
 
-<a asp-controller="Package" asp-action="Index" class="btn btn-info">Continue browsing</a>
-<form asp-controller="ShoppingCart" asp-action="Index" method="post">
-    <button type="submit" class="btn btn-warning">
-        Order Now
-    </button>
-</form>

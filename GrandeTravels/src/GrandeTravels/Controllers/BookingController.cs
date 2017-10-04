@@ -81,5 +81,23 @@ namespace GrandeTravels.Controllers
 
             return View(vm);
         }
+
+        [HttpPost]
+        public async Task<ActionResult> DeleteAllBookings()
+        {
+            User user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            IEnumerable<Booking> bookings = _bookingRepo.GetAll();
+
+            foreach (var booking in bookings)
+            {
+                if (booking.UserID == user.Id)
+                {
+                    _bookingRepo.Delete(booking);
+                }
+            }
+
+            return RedirectToAction("MyBookings", "Profile");
+        }
     }
 }

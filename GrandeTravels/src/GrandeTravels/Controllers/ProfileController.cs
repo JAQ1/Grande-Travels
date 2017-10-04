@@ -23,6 +23,7 @@ namespace GrandeTravels.Controllers
         private SignInManager<User> _signInManager;
         private IRepository<Profile> _profileRepo;
         private IRepository<Booking> _bookingRepo;
+        private IRepository<Package> _packageRepo;
         private IHostingEnvironment _hostingEnviro;
 
 
@@ -31,6 +32,7 @@ namespace GrandeTravels.Controllers
             SignInManager<User> signInManager, 
             IRepository<Profile> profileRepo,
             IRepository<Booking> bookingRepo,
+            IRepository<Package> packageRepo,
             IHostingEnvironment hostingEnviro)
         {
             _userManager = userManager;
@@ -38,6 +40,7 @@ namespace GrandeTravels.Controllers
             _profileRepo = profileRepo;
             _hostingEnviro = hostingEnviro;
             _bookingRepo = bookingRepo;
+            _packageRepo = packageRepo;
         }
 
         [HttpGet]
@@ -159,10 +162,15 @@ namespace GrandeTravels.Controllers
         public async Task<IActionResult> MyBookings()
         {
             User user = await _userManager.GetUserAsync(HttpContext.User);
+            
+            IEnumerable<Booking> bookings = _bookingRepo.Query(b => b.UserID == user.Id);
+            foreach (var booking in bookings)
+            {
+                booking.Package = _packageRepo.GetSingle(p => p.ID == booking.PackageID);
+            }
 
             MyBookingsViewModel vm = new MyBookingsViewModel();
-
-            vm.Bookings = _bookingRepo.Query(b => b.UserID == user.Id);
+            vm.Bookings = bookings;
 
             return View(vm);
         }

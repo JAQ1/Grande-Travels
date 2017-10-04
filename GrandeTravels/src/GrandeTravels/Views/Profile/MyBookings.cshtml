@@ -17,10 +17,24 @@
             </ul>
             <br />
             <div >
-                @for (int i = 0; i < Model.Bookings.Count(); i++)
+                @foreach (var booking in Model.Bookings)
                 {
-                    <p>booking @i</p>
+                    <div class="media">
+                        <div class="media-left">
+                            <img src="~/@booking.Package.PhotoLocation" alt="package photo" style="width:50px;"/>
+                        </div>
+                        <div class="media-body">
+                            <h4>@booking.Package.Name</h4>
+                        </div>
+                        <div class="media-right media-middle">
+                            $@booking.Package.Price
+                        </div>
+                    </div>
+                    <hr />
                 }
+                <form asp-controller="Booking" asp-action="DeleteAllBookings" method="post">
+                    <button type="submit" class="btn btn-danger">Delete All</button>
+                </form>
             </div>
             <br />
         </div>
